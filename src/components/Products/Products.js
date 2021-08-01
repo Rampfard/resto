@@ -12,7 +12,6 @@ import { uiActions } from '../../store/ui-slice';
 import classes from './Products.module.scss';
 
 const Products = ({ filterType }) => {
-  console.log('render')
 	const dispatch = useDispatch();
 	const [clickedItemId, setClickedItemId] = useState(null);
 	const { status, error } = useSelector((state) => state.ui.requestStatus);

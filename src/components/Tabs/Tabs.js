@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
 import classes from './Tabs.module.scss';
 import Tab from './Tab';
@@ -6,12 +6,10 @@ import Tab from './Tab';
 const Tabs = ({ className, onTabChange, initialActiveTab }) => {
 	const [clickedItemId, setClickedItemId] = useState(initialActiveTab);
 
-	useEffect(() => {
-		onTabChange(clickedItemId);
-	}, [clickedItemId, onTabChange]);
-
 	const toggleActiveClassHandler = (id) => {
 		setClickedItemId(id);
+    // set new filter type in parent component
+		onTabChange(id);
 	};
 
 	return (
