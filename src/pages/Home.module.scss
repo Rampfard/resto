@@ -1,0 +1,57 @@
+.home {
+	position: relative;
+	flex: 1;
+	overflow-x: hidden;
+	animation: fadeUp 0.4s ease-out;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	height: 100%;
+	flex: 3;
+	padding: 24px;
+	overflow-x: hidden;
+}
+
+.home-tabs {
+	margin-bottom: 24px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.choice {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	.title {
+		padding-top: 8px;
+	}
+}
+
+@media (max-width: 969px) {
+	.container {
+		padding: 15px;
+		padding-left: 25px;
+	}
+}
+
+@media (max-width: 460px) {
+	.container {
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+}
+
+@keyframes fadeUp {
+	from {
+		transform: translateY(50%);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

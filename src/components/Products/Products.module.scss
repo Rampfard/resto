@@ -1,0 +1,16 @@
+.products {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	list-style-type: none;
+	margin-top: 30px;
+}
+
+@media (max-width: 460px) {
+	.products {
+		padding-right: 10px;
+		padding-left: 15px;
+		margin-top: 0;
+		padding-bottom: 50px;
+	}
+}

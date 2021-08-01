@@ -1,0 +1,168 @@
+.menu {
+	width: 104px;
+	background-color: var(--bg-dark);
+	border-radius: 0 16px 16px 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-bottom: 7px;
+	transition: all 0.2s;
+	scrollbar-width: thin;
+	scrollbar-color: var(--moz-scroll-color);
+
+	.menu-btn {
+		display: none;
+	}
+
+	.menu-btn {
+		left: 33px;
+		z-index: 50;
+		transform: rotateZ(-90deg);
+		transition: transform 0.3s ease-out;
+	}
+}
+
+.menu.active {
+	transform: translateX(0);
+}
+
+.logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 96px;
+	border-radius: 16px;
+	margin-bottom: 10px;
+}
+
+.nav {
+	.nav-list {
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		padding-left: 12px;
+	}
+
+	.nav-item {
+		position: relative;
+		margin-bottom: 18px;
+	}
+
+	.nav-link {
+		position: relative;
+		display: block;
+		width: 92px;
+		height: 80px;
+		padding: 13px 24px 11px 12px;
+		&:hover {
+			background-color: var(--bg-light);
+			border-radius: 12px 0px 0px 12px;
+		}
+	}
+
+	span {
+		display: block;
+		position: absolute;
+		width: 56px;
+		height: 56px;
+		text-align: center;
+		border-radius: 8px;
+	}
+
+	svg {
+		fill: var(--main-color);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.active {
+		background-color: var(--bg-light);
+		border-radius: 12px 0px 0px 12px;
+		span {
+			box-shadow: 0px 8px 24px rgba(234, 124, 105, 0.32);
+			background: var(--main-color);
+		}
+
+		path {
+			fill: #fff;
+		}
+	}
+
+	.nav-item:last-of-type {
+		margin-top: 1.5rem;
+	}
+}
+
+@media (max-width: 1100px) {
+	.menu {
+		width: 70px;
+		height: 100%;
+		overflow-x: visible;
+		overflow-y: auto;
+	}
+
+	.nav {
+		height: 80%;
+		.nav-list {
+			height: 100%;
+			padding-left: 4px;
+			justify-content: space-between;
+		}
+
+		.nav-link {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			width: 100%;
+			height: 60px;
+			padding: 0px;
+		}
+
+		.nav-item:last-of-type {
+			margin-top: auto;
+			margin-bottom: 0;
+			svg {
+				transform: translate(-40%, -50%);
+			}
+		}
+
+		span {
+			width: 42px;
+			height: 42px;
+		}
+	}
+}
+
+@media (max-width: 460px) {
+	.menu {
+		width: 70px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translateX(-100%);
+		z-index: 100;
+		transition: all 0.3s;
+		overflow: visible;
+		height: 100%;
+		.menu-btn {
+			display: block;
+		}
+	}
+
+	.nav {
+		&-list {
+			padding-right: 4px;
+		}
+
+		&-item {
+			margin-bottom: 10px;
+		}
+	}
+
+	.menu.hidden {
+		transform: translateX(-200%);
+	}
+}

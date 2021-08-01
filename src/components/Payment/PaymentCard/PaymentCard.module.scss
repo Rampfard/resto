@@ -1,0 +1,64 @@
+.payment-card {
+	input {
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+	}
+
+	.name {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 130%;
+		color: var(--text-form);
+	}
+
+	label {
+		position: relative;
+		width: 101px;
+		height: 64px;
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+		cursor: pointer;
+		text-align: center;
+		padding: 10px 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		margin-right: 8px;
+		svg {
+			margin-bottom: 5px;
+			fill: var(--text-form);
+		}
+
+		span {
+			position: absolute;
+			display: none;
+			position: absolute;
+			top: 7px;
+			right: 7px;
+			svg {
+				fill: none;
+			}
+		}
+	}
+
+	input:checked + label {
+		background-color: var(--form-bg);
+		border-color: 1px solid var(--text-form);
+		p {
+			color: var(--text-color);
+		}
+
+		svg {
+			fill: var(--text-color);
+		}
+
+		span {
+			display: block;
+			svg {
+				fill: var(--main-color);
+			}
+		}
+	}
+}

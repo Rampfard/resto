@@ -1,0 +1,32 @@
+.form-control {
+	position: relative;
+	input {
+		width: 100%;
+		padding: 14px;
+		background-color: var(--form-bg);
+		border: 1px solid var(--border-color);
+		color: var(--text-form-light);
+		border-radius: 8px;
+		font-size: 14px;
+		line-height: 140%;
+		outline: none;
+		resize: none;
+	}
+
+	input::placeholder {
+		color: var(--text-form);
+		font-size: 12px;
+	}
+
+	label {
+		margin-bottom: 8px;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 130%;
+	}
+}
+
+.form-control.short {
+	display: inline-flex;
+	flex-direction: column;
+}

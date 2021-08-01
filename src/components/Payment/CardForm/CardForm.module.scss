@@ -1,0 +1,36 @@
+.card-form {
+	padding-bottom: 16px;
+	margin-bottom: 16px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 16px;
+	position: relative;
+	small {
+		position: absolute;
+		bottom: -15px;
+	}
+
+	&:last-child {
+		margin-left: 13px;
+	}
+}
+
+@media (max-width: 460px) {
+	.card-form {
+		.input {
+			margin-bottom: 8px;
+
+			&:last-child {
+				margin-left: 10px;
+			}
+		}
+
+		.short {
+			width: 48%;
+		}
+	}
+}

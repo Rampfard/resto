@@ -1,0 +1,39 @@
+.btn {
+	position: absolute;
+	left: -63px;
+	top: 320px;
+	width: 100px;
+	height: 26px;
+	background-color: var(--main-color);
+	transform: rotateZ(90deg);
+	outline: none;
+	border: none;
+	&:before,
+	&:after {
+		position: absolute;
+		content: '';
+		top: 0;
+		width: 30px;
+		height: 100%;
+		background-color: var(--main-color);
+		transform: skewX(40deg);
+	}
+
+	&:before {
+		left: -12px;
+	}
+
+	&:after {
+		transform: skewX(-40deg);
+		right: -12px;
+	}
+
+	span {
+		position: relative;
+		cursor: default;
+		color: var(--text-color);
+		font-size: 16px;
+		font-weight: 500;
+		z-index: 5;
+	}
+}
