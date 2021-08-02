@@ -61,7 +61,7 @@ const CartItem = (props) => {
 						className={classes.quantity}
 						value={quantity}
 						max={maxQuantity}
-						min={0}
+						min={1}
 						onChange={quantityChangeHandler}
 					/>
 				</div>

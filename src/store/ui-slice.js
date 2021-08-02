@@ -32,7 +32,7 @@ const uiSlice = createSlice({
 				error: action.payload.error,
 			};
 		},
-		changeVisibility(state, action) {
+		changeOrderVisibility(state, action) {
 			state.isCartVisible = action.payload.isCartVisible;
 			state.isPaymentVisible = action.payload.isPaymentVisible;
 		},

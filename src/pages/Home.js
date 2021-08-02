@@ -22,8 +22,8 @@ const Home = () => {
 	];
 
 	const dispatch = useDispatch();
-	const { notification, isCartVisible } = useSelector((state) => state.ui);
 
+	const { notification, isCartVisible } = useSelector((state) => state.ui);
 	const [filterType, setFilterType] = useState('hot');
 
 	useEffect(() => {
@@ -40,7 +40,7 @@ const Home = () => {
 
 		return () => clearTimeout(timerId);
 	}, [dispatch, notification.message]);
-  
+
 	const filterProductsHandler = (type) => {
 		dispatch(productsActions.changeFilterType({ filterType: type }));
 		setFilterType(type);

@@ -12,13 +12,6 @@
 	transition: all 0.3s ease-out;
 }
 
-.btn:disabled {
-	background-color: var(--form-bg) !important;
-	border: 1px solid var(--main-color);
-	border-top: none;
-	cursor: not-allowed;
-}
-
 .btn.active {
 	background-color: var(--main-color);
 	border-color: var(--main-color);
@@ -41,4 +34,16 @@
 .btn.outline {
 	border: 1px solid var(--main-color);
 	color: var(--main-color);
+}
+
+.btn:disabled {
+	background-color: var(--form-bg) !important;
+	
+	// border: none;
+	cursor: not-allowed;
+	border-color: transparent;
+	&:hover {
+		background-color: var(--form-bg);
+		box-shadow: none;
+	}
 }

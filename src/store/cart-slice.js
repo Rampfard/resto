@@ -38,7 +38,7 @@ const cartSlice = createSlice({
 			if (action.payload.quantity < 0) {
 				return;
 			}
-
+      
 			if (action.payload.quantity > action.payload.maxQuantity) {
 				existingItem.quantity = action.payload.maxQuantity;
 			}

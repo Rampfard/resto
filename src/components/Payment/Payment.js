@@ -22,13 +22,15 @@ const Payment = () => {
 	];
 
 	const dispatch = useDispatch();
-	const isVisible = useSelector((state) => state.ui.isPaymentVisible);
+
+	const { isPaymentVisible } = useSelector((state) => state.ui);
 	const { deliveryMethod } = useSelector((state) => state.payment);
+	const { totalPrice } = useSelector((state) => state.cart);
 
 	const hidePaymentHandler = () => {
 		dispatch(
-			uiActions.changeVisibility({
-				isCartVisible: false,
+			uiActions.changeOrderVisibility({
+				isCartVisible: true,
 				isPaymentVisible: false,
 			})
 		);
@@ -52,19 +54,17 @@ const Payment = () => {
 
 	return (
 		<div
-			className={classNames(classes.payment, isVisible && classes.active)}
+			className={classNames(
+				classes.payment,
+				isPaymentVisible && classes.active
+			)}
 		>
 			<div className={classes.header}>
 				<h2 className={classNames('title', classes.title)}>Payment</h2>
 				<h3 className={classes.subtitle}>3 payment method available</h3>
 			</div>
 			<form onSubmit={submitFormHandler}>
-				<h3
-					className={classNames(
-						'block-title',
-						classes['method-title']
-					)}
-				>
+				<h3 className={classNames('block-title', classes['method-title'])}>
 					Payment Method
 				</h3>
 				<div className={classes.methods}>
@@ -118,7 +118,7 @@ const Payment = () => {
 					<Button outline hover onClick={hidePaymentHandler}>
 						Cancel
 					</Button>
-					<Button highlighted hover>
+					<Button highlighted hover disabled={totalPrice <= 0}>
 						Confirm Payment
 					</Button>
 				</div>

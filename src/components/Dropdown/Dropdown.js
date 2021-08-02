@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import { ReactComponent as ArrowIcon } from '../../assets/arrow.svg';
 
 import classes from './Dropdown.module.scss';
+import useOutsideClick from '../../hooks/use-outside-click';
 
 const Dropdown = ({
 	options,
@@ -15,6 +16,7 @@ const Dropdown = ({
 }) => {
 	const initialOptions = options ? options : [{ name: 'Empty' }];
 
+	const dropdownRef = useRef(null);
 	const [isActive, setIsActive] = useState();
 	const [selected, setSelected] = useState(initialOptions[0].name);
 
@@ -35,6 +37,10 @@ const Dropdown = ({
 		}
 	};
 
+	useOutsideClick(dropdownRef, () => {
+		setIsActive(false);
+	});
+
 	const active = isActive ? classes.active : null;
 	const highlightClass = highlighted ? classes.highlight : null;
 
@@ -53,6 +59,7 @@ const Dropdown = ({
 
 	return (
 		<div
+			ref={dropdownRef}
 			className={classNames(
 				classes.dropdown,
 				className,
@@ -62,11 +69,7 @@ const Dropdown = ({
 		>
 			<button
 				onClick={onToggleHandler}
-				className={classNames(
-					'form-element',
-					classes['dropdown-btn'],
-					active
-				)}
+				className={classNames('form-element', classes['dropdown-btn'], active)}
 				type="button"
 			>
 				{icon ? icon : <ArrowIcon />}

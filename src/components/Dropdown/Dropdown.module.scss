@@ -1,6 +1,6 @@
 .dropdown {
 	position: relative;
-	width: 115px;
+	min-width: 115px;
 	height: 45px;
 	&.active {
 		z-index: 20;
@@ -14,7 +14,7 @@
 	.dropdown-btn {
 		position: relative;
 		width: 100%;
-		padding: 14px 14px 14px 34px;
+		padding: 14px 14px 14px 40px;
 		background-color: var(--bg-dark);
 		font-weight: 500;
 		font-size: 14px;

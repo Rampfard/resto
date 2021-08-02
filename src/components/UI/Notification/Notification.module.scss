@@ -36,3 +36,24 @@
 		opacity: 1;
 	}
 }
+
+@keyframes showDown {
+	from {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@media (max-width: 900px) {
+	.notification {
+		left: 0;
+		margin: 0 auto;
+		top: 5%;
+		animation-name: showDown;
+	}
+}

@@ -25,7 +25,7 @@ const Cart = () => {
 	const closeCartHandler = () => {
 		if (isCartVisible && !isPaymentVisible) {
 			dispatch(
-				uiActions.changeVisibility({
+				uiActions.changeOrderVisibility({
 					isCartVisible: false,
 					isPaymentVisible: false,
 				})
@@ -39,7 +39,7 @@ const Cart = () => {
 
 	const toggleCartHandler = () => {
 		dispatch(
-			uiActions.changeVisibility({
+			uiActions.changeOrderVisibility({
 				isCartVisible: !isCartVisible,
 				isPaymentVisible: false,
 			})
@@ -48,7 +48,7 @@ const Cart = () => {
 
 	const showPaymentHandler = () => {
 		dispatch(
-			uiActions.changeVisibility({
+			uiActions.changeOrderVisibility({
 				isCartVisible: true,
 				isPaymentVisible: true,
 			})
@@ -145,6 +145,7 @@ const Cart = () => {
 					className={classes.btn}
 					highlighted
 					onClick={showPaymentHandler}
+					disabled={totalPrice <= 0}
 				>
 					Continue to Payment
 				</Button>
