@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import classes from './Loading.module.scss';
 
-const Loading = () => {
+const Loading: FC = () => {
 	return (
 		<div className={classes.loading}>
 			<svg
@@ -12,14 +13,7 @@ const Loading = () => {
 				height="30px"
 				viewBox="0 0 24 30"
 			>
-				<rect
-					x="0"
-					y="10"
-					width="4"
-					height="10"
-					fill="#333"
-					opacity="0.2"
-				>
+				<rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
 					<animate
 						attributeName="opacity"
 						attributeType="XML"
@@ -45,14 +39,7 @@ const Loading = () => {
 						repeatCount="indefinite"
 					/>
 				</rect>
-				<rect
-					x="8"
-					y="10"
-					width="4"
-					height="10"
-					fill="#333"
-					opacity="0.2"
-				>
+				<rect x="8" y="10" width="4" height="10" fill="#333" opacity="0.2">
 					<animate
 						attributeName="opacity"
 						attributeType="XML"
@@ -78,14 +65,7 @@ const Loading = () => {
 						repeatCount="indefinite"
 					/>
 				</rect>
-				<rect
-					x="16"
-					y="10"
-					width="4"
-					height="10"
-					fill="#333"
-					opacity="0.2"
-				>
+				<rect x="16" y="10" width="4" height="10" fill="#333" opacity="0.2">
 					<animate
 						attributeName="opacity"
 						attributeType="XML"

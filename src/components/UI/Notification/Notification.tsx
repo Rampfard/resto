@@ -1,10 +1,13 @@
-import { createPortal } from 'react-dom';
-
 import classNames from 'classnames';
-
+import { FC } from 'react';
+import { createPortal } from 'react-dom';
 import classes from './Notification.module.scss';
 
-const Notification = ({ type, children }) => {
+interface NotificationProps {
+	type: string;
+}
+
+const Notification: FC<NotificationProps> = ({ type, children }) => {
 	let classType;
 
 	if (type === 'success') {
@@ -19,7 +22,7 @@ const Notification = ({ type, children }) => {
 		<div className={classNames(classes.notification, classType)}>
 			{children}
 		</div>,
-		document.getElementById('overlays')
+		document.getElementById('overlays')!
 	);
 };
 

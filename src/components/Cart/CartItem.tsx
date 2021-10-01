@@ -1,34 +1,45 @@
 import { useDispatch } from 'react-redux';
 
-import { Input, NumberInput, Button } from '../UI';
+import { Input, Button } from '../UI';
 import { ReactComponent as DeleteIcon } from '../../assets/delete-icon.svg';
 
 import { cartActions } from '../../store/cart-slice';
 import { productsActions } from '../../store/products-slice';
 
 import classes from './CartItem.module.scss';
+import { FC, FormEvent } from 'react';
 
-const CartItem = (props) => {
+interface CartItemProps {
+	id: string;
+	title: string;
+	imgUrl: string;
+	price: number;
+	quantity: number;
+	totalPrice: number;
+	maxQuantity: number;
+}
+
+const CartItem: FC<CartItemProps> = (props) => {
 	const { id, title, price, quantity, totalPrice, imgUrl, maxQuantity } = props;
 
 	const dispatch = useDispatch();
 
-	const quantityChangeHandler = (e) => {
-		if (+e.target.value > +e.target.getAttribute('max')) {
+	const quantityChangeHandler = (e: FormEvent<HTMLInputElement>) => {
+		if (+e.currentTarget.value > +e.currentTarget.getAttribute('max')!) {
 			return;
 		}
 
 		dispatch(
 			cartActions.updateItemQuantity({
 				id,
-				quantity: +e.target.value
+				quantity: +e.currentTarget.value,
 			})
 		);
 
 		dispatch(
 			productsActions.updateProduct({
 				id,
-				quantity: +e.target.value,
+				quantity: +e.currentTarget.value,
 			})
 		);
 	};
@@ -57,17 +68,17 @@ const CartItem = (props) => {
 						<h3 className={classes.title}>{title}</h3>
 						<small className={classes.price}>$ {price}</small>
 					</div>
-					<NumberInput
+					<Input
 						className={classes.quantity}
 						value={quantity}
+						type="number"
 						max={maxQuantity}
 						min={1}
-						onChange={quantityChangeHandler}
+						onUserInput={quantityChangeHandler}
 					/>
 				</div>
 				<Input
 					className={classes.notice}
-					type="text"
 					placeholder="Order Note..."
 				/>
 			</div>

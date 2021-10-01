@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import classes from './TotalCard.module.scss';
 
-const TotalCard = ({ className, value, percent, descr, icon }) => {
+interface TotalCardProps {
+	className: string;
+	value: number;
+	percent: number;
+	descr: string;
+	icon: ReactNode;
+}
+
+const TotalCard: FC<TotalCardProps> = ({
+	className,
+	value,
+	percent,
+	descr,
+	icon,
+}) => {
 	const activeClass =
 		percent > 0 ? classes['percent-up'] : classes['percent-down'];
 

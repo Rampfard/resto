@@ -21,7 +21,7 @@ const Products = ({ filterType }) => {
 	const { products } = useSelector((state) => state.products);
 
 	useEffect(() => {
-		// dispatch(fetchProductData(filterType));
+		dispatch(fetchProductData(filterType));
 
 		return () => setClickedItemId(null);
 	}, [filterType, dispatch]);
