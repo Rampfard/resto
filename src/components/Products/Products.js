@@ -13,14 +13,17 @@ import classes from './Products.module.scss';
 
 const Products = ({ filterType }) => {
 	const dispatch = useDispatch();
+
 	const [clickedItemId, setClickedItemId] = useState(null);
+
 	const { status, error } = useSelector((state) => state.ui.requestStatus);
 	const { items: cartItems } = useSelector((state) => state.cart);
-
 	const { products } = useSelector((state) => state.products);
 
 	useEffect(() => {
-		dispatch(fetchProductData(filterType));
+		// dispatch(fetchProductData(filterType));
+
+		return () => setClickedItemId(null);
 	}, [filterType, dispatch]);
 
 	useEffect(() => {

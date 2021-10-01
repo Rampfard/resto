@@ -35,9 +35,7 @@ const Menu = () => {
 	const toggleMenuHandler = () => {
 		setIsShown(!isShown);
 	};
-
-	const itemClasses = `${classes['nav-item']}`;
-
+	
 	return (
 		<aside
 			ref={menuRef}

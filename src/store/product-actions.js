@@ -5,9 +5,11 @@ export const fetchProductData = (type) => {
 	return async (dispatch) => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`https://resto-5634a-default-rtdb.europe-west1.firebasedatabase.app/products/dishes/${type}.json`
+				`https://resto-5634a-default-rtdb.europe-west1.firebasedatabase.app/products/dishes${
+					type ? `/${type}` : ''
+				}.json`
 			);
-
+			
 			if (!response.ok) {
 				throw new Error('Could not fetch cart  data!');
 			}
