@@ -1,24 +1,17 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import getCurrentDate from '../../utils/getCurrentDate';
 import classNames from 'classnames';
-import { fetchProductData } from '../../store/product-actions';
-
-import { Input } from '../UI';
+import { FC, FormEvent } from 'react';
 import searchIcon from '../../assets/search-icon.svg';
-
+import getCurrentDate from '../../utils/getCurrentDate';
+import { Input } from '../UI';
 import classes from './Header.module.scss';
-const Header = () => {
+
+interface HeaderProps {
+	onSearchChange: (e: FormEvent<HTMLInputElement>) => void;
+}
+
+const Header: FC<HeaderProps> = ({ onSearchChange }) => {
 	const { date, day, month, year } = getCurrentDate();
-	// const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	dispatch(fetchProductData());
-	// }, [dispatch]);
-
-	const products = useSelector((state) => state.products);
-	// console.log(products)
 	return (
 		<header className={classes.header}>
 			<div className={classes.info}>
@@ -33,6 +26,7 @@ const Header = () => {
 				type="search"
 				placeholder="Search for food, coffe, etc..."
 				icon={searchIcon}
+				onUserInput={onSearchChange}
 			/>
 		</header>
 	);

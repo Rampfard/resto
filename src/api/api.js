@@ -12,9 +12,10 @@ export const getAllProducts = async () => {
 
 	const transformedItems = [];
 
-	for (const category of data) {
+	for (const category in data) {
 		transformedItems.push(...data[category]);
 	}
+
 	return transformedItems;
 };
 

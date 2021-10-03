@@ -14,6 +14,7 @@ import Cart from '../components/Cart/Cart';
 import Payment from '../components/Payment/Payment';
 import { useDispatch } from 'react-redux';
 import { changeOrderVisibility } from '../store/ui-slice';
+import { fetchAllProducts } from '../store/product-actions';
 
 const Home: FC = () => {
 	const dispatch = useDispatch();
@@ -30,10 +31,25 @@ const Home: FC = () => {
 	const { notification, isCartVisible, deliveryMethods } = useAppSelector(
 		(state) => state.ui
 	);
-	const [productsType, setPropductsType] = useState('hot');
+	const [productsType, setProductsType] = useState('hot');
+	const [searchFilter, setSearchFilter] = useState('');
 
 	const filterProductsHandler = (type: string) => {
-		setPropductsType(type);
+		setProductsType(type);
+	};
+
+	const fetchAndfilterProducts = () => {
+		let timer: NodeJS.Timeout;
+
+		return (e: FormEvent<HTMLInputElement>) => {
+			const value = e.currentTarget.value;
+			clearTimeout(timer);
+
+			timer = setTimeout(() => {
+				dispatch(fetchAllProducts());
+				setSearchFilter(value);
+			}, 400);
+		};
 	};
 
 	const filterByDeliveryHandler = (e: FormEvent<HTMLButtonElement>) => {};
@@ -51,7 +67,7 @@ const Home: FC = () => {
 		<>
 			<section className={classes.home}>
 				<div className={classes.container}>
-					<Header />
+					<Header onSearchChange={fetchAndfilterProducts()} />
 					<Tabs
 						className={classes['home-tabs']}
 						onTabChange={filterProductsHandler}
@@ -67,7 +83,7 @@ const Home: FC = () => {
 							onChange={filterByDeliveryHandler}
 						/>
 					</div>
-					<Products filterType={productsType} />
+					<Products filterType={productsType} searchFilter={searchFilter} />
 				</div>
 			</section>
 			<Cart />

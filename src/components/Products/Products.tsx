@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import ProductCard from './Product/ProductCard';
 import { ReactComponent as Loading } from '../../assets/loading.svg';
 
-import { fetchProductData } from '../../store/product-actions';
+import { fetchProductsByType } from '../../store/product-actions';
 import { addProduct } from '../../store/cart-slice';
 
 import classes from './Products.module.scss';
@@ -13,9 +13,10 @@ import { showNotification } from '../../utils/showNotification';
 
 interface ProductsProps {
 	filterType: string;
+	searchFilter: string;
 }
 
-const Products: FC<ProductsProps> = ({ filterType }) => {
+const Products: FC<ProductsProps> = ({ filterType, searchFilter }) => {
 	const dispatch = useDispatch();
 	const [clickedItemId, setClickedItemId] = useState<string | null>(null);
 
@@ -28,8 +29,7 @@ const Products: FC<ProductsProps> = ({ filterType }) => {
 	} = useAppSelector((state) => state);
 
 	useEffect(() => {
-		dispatch(fetchProductData(filterType));
-
+		dispatch(fetchProductsByType(filterType));
 		return () => setClickedItemId(null);
 	}, [filterType, dispatch]);
 
@@ -75,29 +75,49 @@ const Products: FC<ProductsProps> = ({ filterType }) => {
 		return <div className="centered">No dishes yet</div>;
 	}
 
-	const content = products.map((product) => {
-		const { name, id, price, quantity, img_src: imgUrl, type } = product;
-		const cartItem = items.find((item) => item.id === id);
+	let content = products;
 
-		return (
-			<ProductCard
-				key={id}
-				activeClass={clickedItemId === id ? 'active' : null}
-				id={id}
-				name={name}
-				price={price}
-				img_src={imgUrl}
-				quantity={
-					cartItem ? cartItem.maxQuantity - cartItem.quantity : quantity
-				}
-				type={type}
-				onToggle={toggleActiveClassHandler}
-				onAdd={addItemHandler}
-			/>
+	if (searchFilter.trim().length > 0) {
+		content = content.filter(
+			(product) =>
+				product.name.includes(searchFilter) ||
+				product.type.includes(searchFilter)
 		);
-	});
+	}
 
-	return <ul className={classes.products}>{content}</ul>;
+	if (searchFilter.trim().length < 1) {
+		content = content.filter((product) => product.type.includes(filterType));
+	}
+
+	if (content.length < 1) {
+		return <div className="centered">No matches...</div>;
+	}
+
+	return (
+		<ul className={classes.products}>
+			{content.map((product) => {
+				const { name, id, price, quantity, img_src: imgUrl, type } = product;
+				const cartItem = items.find((item) => item.id === id);
+
+				return (
+					<ProductCard
+						key={id}
+						activeClass={clickedItemId === id ? 'active' : null}
+						id={id}
+						name={name}
+						price={price}
+						img_src={imgUrl}
+						quantity={
+							cartItem ? cartItem.maxQuantity - cartItem.quantity : quantity
+						}
+						type={type}
+						onToggle={toggleActiveClassHandler}
+						onAdd={addItemHandler}
+					/>
+				);
+			})}
+		</ul>
+	);
 };
 
 export default Products;
