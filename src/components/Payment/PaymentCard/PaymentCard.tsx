@@ -1,10 +1,18 @@
-import React from 'react';
-
 import classNames from 'classnames';
+import { FC } from 'react';
 import classes from './PaymentCard.module.scss';
 
-const PaymentCard = (props) => {
-	const { id, title, className, children, checked, onChange } = props;
+interface PaymentCardProps {
+	id: PaymentMethod;
+	title: string;
+	className: string;
+	checked?: boolean;
+	icon?: JSX.Element;
+	onChange: (id: PaymentMethod) => void;
+}
+
+const PaymentCard: FC<PaymentCardProps> = (props) => {
+	const { id, title, icon, className, checked, onChange } = props;
 
 	return (
 		<div className={classNames(classes['payment-card'], className)}>
@@ -12,11 +20,11 @@ const PaymentCard = (props) => {
 				id={id}
 				name="method"
 				type="radio"
-				onChange={(e) => onChange(e, id)}
+				onChange={(e) => onChange(id)}
 				checked={checked}
 			/>
 			<label htmlFor={id}>
-				{children}
+				{icon ? icon : null}
 				<p className={classes.name}>{title}</p>
 				<span>
 					<svg

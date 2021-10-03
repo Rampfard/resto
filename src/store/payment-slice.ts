@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface IPaymentState {
-	method: 'card' | 'cash';
+	method: PaymentMethod;
 	deliveryMethod: DeliveryMethods;
 }
 
@@ -23,6 +23,6 @@ const paymentSlice = createSlice({
 	},
 });
 
-export const paymentActions = paymentSlice.actions;
+export const { changeDeliveyMethod } = paymentSlice.actions;
 
 export default paymentSlice.reducer;

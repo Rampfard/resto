@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface IProductsState {
 	items: ICartProduct[];
 	totalPrice: number;
+	discount: number | null;
 }
 
 const initialState: IProductsState = {
 	items: [],
 	totalPrice: 0,
+	discount: null,
 };
 
 const cartSlice = createSlice({

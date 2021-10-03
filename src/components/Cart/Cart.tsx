@@ -1,39 +1,24 @@
-import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
-import useOutsideClick from '../../hooks/use-outside-click';
 
 import { Button, ToggleButton } from '../UI';
 import CartItem from './CartItem';
 
 import { changeOrderVisibility } from '../../store/ui-slice';
-import { paymentActions } from '../../store/payment-slice';
+import { changeDeliveyMethod } from '../../store/payment-slice';
 
 import classes from './Cart.module.scss';
 import { useAppSelector } from '../../hooks/redux-hooks';
+import { FormEvent } from 'react';
 
 const Cart = () => {
 	const dispatch = useDispatch();
-	const cartRef = useRef(null);
 
 	const {
-		cart: { items, totalPrice },
+		cart: { items, totalPrice, discount },
 		payment: { deliveryMethod },
 		ui: { deliveryMethods, isCartVisible, isPaymentVisible },
 	} = useAppSelector((state) => state);
-
-	const closeCartHandler = () => {
-		if (isCartVisible && !isPaymentVisible) {
-			dispatch(
-				changeOrderVisibility({
-					isCartVisible: false,
-					isPaymentVisible: false,
-				})
-			);
-		}
-	};
-
-	useOutsideClick(cartRef, closeCartHandler);
 
 	const toggleCartHandler = () => {
 		dispatch(
@@ -53,18 +38,13 @@ const Cart = () => {
 		);
 	};
 
-	// change any
-	const changeDeliveryMethodHandler = (e: any) => {
+	const changeDeliveryMethodHandler = (e: FormEvent<HTMLButtonElement>) => {
 		dispatch(
-			paymentActions.changeDeliveyMethod({
-				deliveryMethod: e.target.innerText,
+			changeDeliveyMethod({
+				deliveryMethod: e.currentTarget.innerText as DeliveryMethods,
 			})
 		);
 	};
-
-	const visibleClass = isCartVisible ? classes.shown : null;
-
-	const activeClass = isCartVisible && isPaymentVisible ? classes.active : null;
 
 	const cartItems = items.map((item) => {
 		const { name, id, price, quantity, totalPrice, img_src, maxQuantity } =
@@ -118,12 +98,12 @@ const Cart = () => {
 		);
 	}
 
-	const discount = 0;
-
 	return (
 		<div
-			ref={cartRef}
-			className={classNames(classes.cart, activeClass, visibleClass)}
+			className={classNames(classes.cart, {
+				[classes.shown]: isCartVisible,
+				[classes.active]: isCartVisible && isPaymentVisible,
+			})}
 		>
 			<ToggleButton onClick={toggleCartHandler}>My Order</ToggleButton>
 			<div className={classes.container}>
@@ -133,7 +113,9 @@ const Cart = () => {
 			<div className={classes['total-container']}>
 				<div className={classes.total}>
 					<p className={classes['total-title']}>Discount</p>
-					<p className={classes['total-price']}>$ {discount.toFixed(2)}</p>
+					<p className={classes['total-price']}>
+						$ {discount ? discount.toFixed(2) : '0.00'}
+					</p>
 				</div>
 				<div className={classes.total}>
 					<p className={classes['total-title']}>Sub Total</p>

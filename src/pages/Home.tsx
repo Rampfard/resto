@@ -10,8 +10,14 @@ import Tabs from '../components/Tabs/Tabs';
 import Notification from '../components/UI/Notification/Notification';
 
 import classes from './Home.module.scss';
+import Cart from '../components/Cart/Cart';
+import Payment from '../components/Payment/Payment';
+import { useDispatch } from 'react-redux';
+import { changeOrderVisibility } from '../store/ui-slice';
 
 const Home: FC = () => {
+	const dispatch = useDispatch();
+
 	const tabs = [
 		{ type: 'hot', name: 'Hot Dishes' },
 		{ type: 'cold', name: 'Cold Dishes' },
@@ -31,6 +37,15 @@ const Home: FC = () => {
 	};
 
 	const filterByDeliveryHandler = (e: FormEvent<HTMLButtonElement>) => {};
+
+	const onBackdropClick = () => {
+		dispatch(
+			changeOrderVisibility({
+				isCartVisible: false,
+				isPaymentVisible: false,
+			})
+		);
+	};
 
 	return (
 		<>
@@ -55,12 +70,14 @@ const Home: FC = () => {
 					<Products filterType={productsType} />
 				</div>
 			</section>
+			<Cart />
+			<Payment />
+			{isCartVisible && <Backdrop onClick={onBackdropClick} />}
 			{notification.message && (
 				<Notification type={notification.type}>
 					{notification.message}
 				</Notification>
 			)}
-			{isCartVisible && <Backdrop />}
 		</>
 	);
 };

@@ -1,6 +1,7 @@
 type DeliveryMethods = 'Dine In' | 'Delivery' | 'To Go';
 type RequestStatusType = 'completed' | 'pending' | 'error' | null;
 type NotificationType = 'success' | 'error' | 'warn' | null;
+type PaymentMethod = 'card' | 'cash' | 'paypal';
 
 interface ICartProduct {
 	id: string;
