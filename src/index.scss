@@ -34,6 +34,7 @@ html {
 	--status-orange-transparent: rgba(255, 181, 114, 0.24);
 	--notification-success: #269675;
 	--notification-error: #d43b68;
+	--notification-warn: #ea7c69;
 	--moz-scroll-color: rgba(21, 20, 26, 0.4) transparent;
 }
 
@@ -63,6 +64,10 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+a {
+	text-decoration: none;
 }
 
 .loading {
