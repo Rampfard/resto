@@ -18,7 +18,7 @@ const Header = () => {
 	// }, [dispatch]);
 
 	const products = useSelector((state) => state.products);
-	console.log(products)
+	// console.log(products)
 	return (
 		<header className={classes.header}>
 			<div className={classes.info}>

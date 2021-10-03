@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, FormEvent, useState } from 'react';
 import classNames from 'classnames';
+import { useAppSelector } from '../hooks/redux-hooks';
 
 import { Backdrop } from '../components/UI';
 import Dropdown from '../components/Dropdown/Dropdown';
@@ -9,44 +9,28 @@ import Products from '../components/Products/Products';
 import Tabs from '../components/Tabs/Tabs';
 import Notification from '../components/UI/Notification/Notification';
 
-import { productsActions } from '../store/products-slice';
-import { uiActions } from '../store/ui-slice';
-
 import classes from './Home.module.scss';
 
-const Home = () => {
-	const dropdownOptions = [
-		{ name: 'Dine In' },
-		{ name: 'Delivery' },
-		{ name: 'To Go' },
+const Home: FC = () => {
+	const tabs = [
+		{ type: 'hot', name: 'Hot Dishes' },
+		{ type: 'cold', name: 'Cold Dishes' },
+		{ type: 'soup', name: 'Soup' },
+		{ type: 'grill', name: 'Grill' },
+		{ type: 'appetizer', name: 'Appetizer' },
+		{ type: 'dessert', name: 'Dessert' },
 	];
 
-	const dispatch = useDispatch();
+	const { notification, isCartVisible, deliveryMethods } = useAppSelector(
+		(state) => state.ui
+	);
+	const [productsType, setPropductsType] = useState('hot');
 
-	const { notification, isCartVisible } = useSelector((state) => state.ui);
-	const [filterType, setFilterType] = useState('hot');
-
-	useEffect(() => {
-		let timerId;
-		if (notification.message) {
-			timerId = setTimeout(() => {
-				dispatch(
-					uiActions.setNotification({
-						notification: null,
-					})
-				);
-			}, 2000);
-		}
-
-		return () => clearTimeout(timerId);
-	}, [dispatch, notification.message]);
-
-	const filterProductsHandler = (type) => {
-		dispatch(productsActions.changeFilterType({ filterType: type }));
-		setFilterType(type);
+	const filterProductsHandler = (type: string) => {
+		setPropductsType(type);
 	};
 
-	const filterByDeliveryHandler = (e) => {};
+	const filterByDeliveryHandler = (e: FormEvent<HTMLButtonElement>) => {};
 
 	return (
 		<>
@@ -56,18 +40,19 @@ const Home = () => {
 					<Tabs
 						className={classes['home-tabs']}
 						onTabChange={filterProductsHandler}
-						initialActiveTab={filterType}
+						initialActiveTab={productsType}
+						tabs={tabs}
 					/>
 					<div className={classes.choice}>
 						<p className={classNames('block-title', classes.title)}>
 							Choose Dishes
 						</p>
 						<Dropdown
-							options={dropdownOptions}
+							options={deliveryMethods}
 							onChange={filterByDeliveryHandler}
 						/>
 					</div>
-					<Products filterType={filterType} />
+					<Products filterType={productsType} />
 				</div>
 			</section>
 			{notification.message && (

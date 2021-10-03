@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 import classNames from 'classnames';
 import classes from './Circle.module.scss';
@@ -21,7 +21,7 @@ const Circle = ({ radius, transparent, fill, className }) => {
 					cy="50%"
 					r={radius}
 					strokeDasharray={pathLength}
-					strokeDashoffset={pathLength - (fill * 1.5)}
+					strokeDashoffset={pathLength - fill * 1.5}
 					strokeWidth="11.4783"
 				></circle>
 			)}

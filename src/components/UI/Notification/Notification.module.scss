@@ -25,6 +25,10 @@
 	background-color: var(--notification-error);
 }
 
+.notification.warn {
+	background-color: var(--notification-warn);
+}
+
 @keyframes showUp {
 	from {
 		transform: translateY(200%);

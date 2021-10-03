@@ -1,24 +1,31 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect, FC } from 'react';
+import { useDispatch } from 'react-redux';
 
 import ProductCard from './Product/ProductCard';
 import { ReactComponent as Loading } from '../../assets/loading.svg';
 
-import { productsActions } from '../../store/products-slice';
 import { fetchProductData } from '../../store/product-actions';
-import { cartActions } from '../../store/cart-slice';
-import { uiActions } from '../../store/ui-slice';
+import { addProduct } from '../../store/cart-slice';
 
 import classes from './Products.module.scss';
+import { useAppSelector } from '../../hooks/redux-hooks';
+import { showNotification } from '../../utils/showNotification';
 
-const Products = ({ filterType }) => {
+interface ProductsProps {
+	filterType: string;
+}
+
+const Products: FC<ProductsProps> = ({ filterType }) => {
 	const dispatch = useDispatch();
+	const [clickedItemId, setClickedItemId] = useState<string | null>(null);
 
-	const [clickedItemId, setClickedItemId] = useState(null);
-
-	const { status, error } = useSelector((state) => state.ui.requestStatus);
-	const { items: cartItems } = useSelector((state) => state.cart);
-	const { products } = useSelector((state) => state.products);
+	const {
+		ui: {
+			requestStatus: { status, error },
+		},
+		cart: { items },
+		products: { products },
+	} = useAppSelector((state) => state);
 
 	useEffect(() => {
 		dispatch(fetchProductData(filterType));
@@ -26,36 +33,29 @@ const Products = ({ filterType }) => {
 		return () => setClickedItemId(null);
 	}, [filterType, dispatch]);
 
-	useEffect(() => {
-		if (status === 'completed') {
-			dispatch(productsActions.updateProducts({ items: cartItems }));
-		}
-	}, [status, dispatch]);
+	const toggleActiveClassHandler = (id: string) => {
+		setClickedItemId(id);
 
-	const toggleActiveClassHandler = (e, id) => {
-		if (e.target.nodeName !== 'BUTTON') {
-			setClickedItemId(id);
-		}
-
-		if (id === clickedItemId && e.target.nodeName !== 'BUTTON') {
+		if (id === clickedItemId) {
 			setClickedItemId(null);
 		}
 	};
 
-	const addItemHandler = (item) => {
+	const addItemHandler = (
+		item: Omit<IProduct, 'maxQuantity' | 'totalPrice' | 'art'>
+	) => {
 		if (item.quantity === 0) {
 			return;
 		}
 
-		dispatch(cartActions.addProduct({ ...item, maxQuantity: item.quantity }));
+		dispatch(addProduct({ ...item }));
 
-		dispatch(productsActions.updateProduct({ id: item.id }));
-
-		dispatch(
-			uiActions.setNotification({
+		showNotification(
+			{
 				message: 'Item added to cart!',
 				type: 'success',
-			})
+			},
+			dispatch
 		);
 	};
 
@@ -77,15 +77,19 @@ const Products = ({ filterType }) => {
 
 	const content = products.map((product) => {
 		const { name, id, price, quantity, img_src: imgUrl, type } = product;
+		const cartItem = items.find((item) => item.id === id);
+
 		return (
 			<ProductCard
 				key={id}
 				activeClass={clickedItemId === id ? 'active' : null}
 				id={id}
-				title={name}
+				name={name}
 				price={price}
-				img={imgUrl}
-				quantity={quantity}
+				img_src={imgUrl}
+				quantity={
+					cartItem ? cartItem.maxQuantity - cartItem.quantity : quantity
+				}
 				type={type}
 				onToggle={toggleActiveClassHandler}
 				onAdd={addItemHandler}

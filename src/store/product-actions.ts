@@ -1,15 +1,16 @@
-import { productsActions } from './products-slice';
-import { uiActions } from './ui-slice';
+import { Dispatch } from 'redux';
+import { replaceProducts } from './products-slice';
+import { setRequestStatus } from './ui-slice';
 
-export const fetchProductData = (type) => {
-	return async (dispatch) => {
+export const fetchProductData = (type: string) => {
+	return async (dispatch: Dispatch) => {
 		const fetchData = async () => {
 			const response = await fetch(
 				`https://resto-5634a-default-rtdb.europe-west1.firebasedatabase.app/products/dishes${
 					type ? `/${type}` : ''
 				}.json`
 			);
-			
+
 			if (!response.ok) {
 				throw new Error('Could not fetch cart  data!');
 			}
@@ -21,7 +22,7 @@ export const fetchProductData = (type) => {
 
 		try {
 			dispatch(
-				uiActions.setRequestStatus({
+				setRequestStatus({
 					status: 'pending',
 					error: null,
 				})
@@ -30,24 +31,26 @@ export const fetchProductData = (type) => {
 			const products = await fetchData();
 
 			dispatch(
-				productsActions.replaceProducts({
+				replaceProducts({
 					products: products || [],
 				})
 			);
 
 			dispatch(
-				uiActions.setRequestStatus({
+				setRequestStatus({
 					status: 'completed',
 					error: null,
 				})
 			);
-		} catch (e) {
-			dispatch(
-				uiActions.setRequestStatus({
-					status: 'error',
-					error: e.message || 'Somthing went wrong!',
-				})
-			);
+		} catch (e: unknown) {
+			if (e instanceof Error) {
+				dispatch(
+					setRequestStatus({
+						status: 'error',
+						error: e.message || 'Somthing went wrong!',
+					})
+				);
+			}
 		}
 	};
 };

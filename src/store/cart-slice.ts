@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+interface IProductsState {
+	items: ICartProduct[];
+	totalPrice: number;
+}
+
+const initialState: IProductsState = {
 	items: [],
 	totalPrice: 0,
 };
@@ -9,12 +14,19 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addProduct(state, action) {
+		addProduct(
+			state: IProductsState,
+			action: PayloadAction<
+				Omit<IProduct, 'maxQuantity' | 'totalPrice' | 'art'>
+			>
+		) {
 			const newItem = action.payload;
 			const existingItem = state.items.find(
 				(item) => item.id === action.payload.id
 			);
+
 			state.totalPrice = state.totalPrice + newItem.price;
+
 			if (!existingItem) {
 				state.items.push({
 					id: newItem.id,
@@ -23,25 +35,23 @@ const cartSlice = createSlice({
 					totalPrice: newItem.price,
 					name: newItem.name,
 					type: newItem.type,
-					img_src: newItem.img,
+					img_src: newItem.img_src,
+					maxQuantity: newItem.quantity,
 				});
 			} else {
 				existingItem.quantity++;
 				existingItem.totalPrice = existingItem.totalPrice + newItem.price;
 			}
 		},
-		updateItemQuantity(state, action) {
+		updateItemQuantity(
+			state: IProductsState,
+			action: PayloadAction<{ quantity: number; id: string }>
+		) {
 			const existingItem = state.items.find(
 				(item) => item.id === action.payload.id
 			);
 
-			if (action.payload.quantity < 0) {
-				return;
-			}
-      
-			if (action.payload.quantity > action.payload.maxQuantity) {
-				existingItem.quantity = action.payload.maxQuantity;
-			}
+			if (!existingItem) return;
 
 			existingItem.quantity = action.payload.quantity;
 			existingItem.totalPrice = existingItem.price * action.payload.quantity;
@@ -50,18 +60,20 @@ const cartSlice = createSlice({
 				return total + item.totalPrice;
 			}, 0);
 		},
-		removeItem(state, action) {
+		removeItem(state: IProductsState, action: PayloadAction<{ id: string }>) {
 			const existingItem = state.items.find(
 				(item) => item.id === action.payload.id
 			);
 
 			state.items = state.items.filter((item) => item.id !== action.payload.id);
 
-			state.totalPrice = state.totalPrice - existingItem.totalPrice;
+			if (existingItem) {
+				state.totalPrice = state.totalPrice - existingItem.totalPrice;
+			}
 		},
 	},
 });
 
-export const cartActions = cartSlice.actions;
+export const { addProduct, removeItem, updateItemQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

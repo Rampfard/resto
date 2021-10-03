@@ -1,31 +1,31 @@
 import { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 import useOutsideClick from '../../hooks/use-outside-click';
 
 import { Button, ToggleButton } from '../UI';
 import CartItem from './CartItem';
 
-import { uiActions } from '../../store/ui-slice';
+import { changeOrderVisibility } from '../../store/ui-slice';
 import { paymentActions } from '../../store/payment-slice';
 
 import classes from './Cart.module.scss';
+import { useAppSelector } from '../../hooks/redux-hooks';
 
 const Cart = () => {
 	const dispatch = useDispatch();
 	const cartRef = useRef(null);
 
-	const { items, totalPrice } = useSelector((state) => state.cart);
-	const { deliveryMethod } = useSelector((state) => state.payment);
-	const { maxValues } = useSelector((state) => state.products);
-	const { isCartVisible, isPaymentVisible, deliveryMethods } = useSelector(
-		(state) => state.ui
-	);
+	const {
+		cart: { items, totalPrice },
+		payment: { deliveryMethod },
+		ui: { deliveryMethods, isCartVisible, isPaymentVisible },
+	} = useAppSelector((state) => state);
 
 	const closeCartHandler = () => {
 		if (isCartVisible && !isPaymentVisible) {
 			dispatch(
-				uiActions.changeOrderVisibility({
+				changeOrderVisibility({
 					isCartVisible: false,
 					isPaymentVisible: false,
 				})
@@ -35,11 +35,9 @@ const Cart = () => {
 
 	useOutsideClick(cartRef, closeCartHandler);
 
-	const discount = 0;
-
 	const toggleCartHandler = () => {
 		dispatch(
-			uiActions.changeOrderVisibility({
+			changeOrderVisibility({
 				isCartVisible: !isCartVisible,
 				isPaymentVisible: false,
 			})
@@ -48,14 +46,15 @@ const Cart = () => {
 
 	const showPaymentHandler = () => {
 		dispatch(
-			uiActions.changeOrderVisibility({
+			changeOrderVisibility({
 				isCartVisible: true,
 				isPaymentVisible: true,
 			})
 		);
 	};
 
-	const changeDeliveryMethodHandler = (e) => {
+	// change any
+	const changeDeliveryMethodHandler = (e: any) => {
 		dispatch(
 			paymentActions.changeDeliveyMethod({
 				deliveryMethod: e.target.innerText,
@@ -68,8 +67,8 @@ const Cart = () => {
 	const activeClass = isCartVisible && isPaymentVisible ? classes.active : null;
 
 	const cartItems = items.map((item) => {
-		const { name, id, price, quantity, totalPrice, img_src } = item;
-		const maxValue = maxValues[id];
+		const { name, id, price, quantity, totalPrice, img_src, maxQuantity } =
+			item;
 
 		return (
 			<CartItem
@@ -79,8 +78,8 @@ const Cart = () => {
 				price={price}
 				quantity={quantity}
 				totalPrice={totalPrice}
-				imgUrl={img_src}
-				maxQuantity={maxValue}
+				img_src={img_src}
+				maxQuantity={maxQuantity}
 			/>
 		);
 	});
@@ -118,6 +117,8 @@ const Cart = () => {
 			</>
 		);
 	}
+
+	const discount = 0;
 
 	return (
 		<div

@@ -35,7 +35,7 @@ const Menu = () => {
 	const toggleMenuHandler = () => {
 		setIsShown(!isShown);
 	};
-	
+
 	return (
 		<aside
 			ref={menuRef}

@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, FormEvent } from 'react';
 import classes from './ToggleButton.module.scss';
 
 interface ToggleButtonProps {
-	className: string;
-	onClick: () => void;
+	className?: string;
+	onClick?: (e: FormEvent<HTMLButtonElement>) => void;
 }
 
 const ToggleButton: FC<ToggleButtonProps> = ({

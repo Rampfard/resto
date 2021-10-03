@@ -14,10 +14,10 @@
 	.dropdown-btn {
 		position: relative;
 		width: 100%;
-		padding: 14px 14px 14px 40px;
+		padding: 0.9rem 0.9rem 0.9rem 2.5rem;
 		background-color: var(--bg-dark);
 		font-weight: 500;
-		font-size: 14px;
+		font-size: 0.9rem;
 		line-height: 130%;
 		z-index: 5;
 		transition: all 0.2s;
@@ -72,6 +72,18 @@
 	z-index: -1;
 	opacity: 0;
 	transition: all 0.3s ease-in-out;
+}
+
+.invert {
+	.items {
+		transform: translateY(0);
+	}
+}
+
+.invert.active {
+	.items {
+		transform: translateY(calc(-120%));
+	}
 }
 
 .item {

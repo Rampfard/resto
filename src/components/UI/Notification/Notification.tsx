@@ -4,22 +4,18 @@ import { createPortal } from 'react-dom';
 import classes from './Notification.module.scss';
 
 interface NotificationProps {
-	type: string;
+	type: NotificationType;
 }
 
 const Notification: FC<NotificationProps> = ({ type, children }) => {
-	let classType;
-
-	if (type === 'success') {
-		classType = classes.success;
-	}
-
-	if (type === 'error') {
-		classType = classes.error;
-	}
-
 	return createPortal(
-		<div className={classNames(classes.notification, classType)}>
+		<div
+			className={classNames(classes.notification, {
+				[classes.success]: type === 'success',
+				[classes.warn]: type === 'warn',
+				[classes.error]: type === 'error',
+			})}
+		>
 			{children}
 		</div>,
 		document.getElementById('overlays')!

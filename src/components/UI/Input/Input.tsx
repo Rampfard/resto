@@ -34,12 +34,19 @@ const Input: FC<InputProps> = (props) => {
 		...attributes
 	} = props;
 
-	const userInpuHandler = (e: FormEvent<HTMLInputElement>) => {
+	const userInputHandler = (e: FormEvent<HTMLInputElement>) => {
 		if (onUserInput) {
 			onUserInput(e);
 		}
 
 		setValue(e.currentTarget.value);
+	};
+
+	const onBlurHandler = () => {
+		if (type === 'number' && value === '') {
+			console.log('work', value);
+			setValue('1');
+		}
 	};
 
 	return (
@@ -58,7 +65,8 @@ const Input: FC<InputProps> = (props) => {
 				id={id}
 				type={type ? type : 'text'}
 				value={value}
-				onChange={userInpuHandler}
+				onChange={userInputHandler}
+				onBlur={onBlurHandler}
 				{...attributes}
 			/>
 		</div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, FC, FormEvent } from 'react';
 import classNames from 'classnames';
 
 import { ReactComponent as ArrowIcon } from '../../assets/arrow.svg';
@@ -6,18 +6,29 @@ import { ReactComponent as ArrowIcon } from '../../assets/arrow.svg';
 import classes from './Dropdown.module.scss';
 import useOutsideClick from '../../hooks/use-outside-click';
 
-const Dropdown = ({
+interface DropdownProps {
+	options: { name: string }[];
+	className?: string;
+	value?: string;
+	icon?: JSX.Element;
+	highlighted?: boolean;
+	invert?: boolean;
+	onChange: (e: FormEvent<HTMLButtonElement>) => void;
+}
+
+const Dropdown: FC<DropdownProps> = ({
 	options,
 	className,
 	value,
 	icon,
+	invert,
 	highlighted,
 	onChange,
 }) => {
 	const initialOptions = options ? options : [{ name: 'Empty' }];
 
 	const dropdownRef = useRef(null);
-	const [isActive, setIsActive] = useState();
+	const [isActive, setIsActive] = useState<boolean>();
 	const [selected, setSelected] = useState(initialOptions[0].name);
 
 	const onToggleHandler = () => {
@@ -30,8 +41,8 @@ const Dropdown = ({
 		}
 	}, [value]);
 
-	const selectorChangeHandler = (e) => {
-		setSelected(e.target.innerText);
+	const selectorChangeHandler = (e: FormEvent<HTMLButtonElement>) => {
+		setSelected(e.currentTarget.innerText);
 		if (onChange) {
 			onChange(e);
 		}
@@ -40,9 +51,6 @@ const Dropdown = ({
 	useOutsideClick(dropdownRef, () => {
 		setIsActive(false);
 	});
-
-	const active = isActive ? classes.active : null;
-	const highlightClass = highlighted ? classes.highlight : null;
 
 	const dropdownOptions = initialOptions.map((option) => {
 		return (
@@ -60,16 +68,17 @@ const Dropdown = ({
 	return (
 		<div
 			ref={dropdownRef}
-			className={classNames(
-				classes.dropdown,
-				className,
-				active,
-				highlightClass
-			)}
+			className={classNames(classes.dropdown, className, {
+				[classes.active]: isActive,
+				[classes.highlight]: highlighted,
+				[classes.invert]: invert,
+			})}
 		>
 			<button
 				onClick={onToggleHandler}
-				className={classNames('form-element', classes['dropdown-btn'], active)}
+				className={classNames('form-element', classes['dropdown-btn'], {
+					[classes.active]: isActive,
+				})}
 				type="button"
 			>
 				{icon ? icon : <ArrowIcon />}

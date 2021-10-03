@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
 import PaymentCard from './PaymentCard/PaymentCard';
@@ -9,10 +9,12 @@ import { ReactComponent as CreditCardIcon } from '../../assets/creditcard.svg';
 import { ReactComponent as PaypalIcon } from '../../assets/paypal.svg';
 import { ReactComponent as CashIcon } from '../../assets/cash.svg';
 
-import { uiActions } from '../../store/ui-slice';
+import { changeOrderVisibility } from '../../store/ui-slice';
 import { paymentActions } from '../../store/payment-slice';
 
 import classes from './Payment.module.scss';
+import { useAppSelector } from '../../hooks/redux-hooks';
+import { FormEvent } from 'react';
 
 const Payment = () => {
 	const dropdownOptions = [
@@ -23,31 +25,33 @@ const Payment = () => {
 
 	const dispatch = useDispatch();
 
-	const { isPaymentVisible } = useSelector((state) => state.ui);
-	const { deliveryMethod } = useSelector((state) => state.payment);
-	const { totalPrice } = useSelector((state) => state.cart);
+	const {
+		cart: { totalPrice },
+		payment: { deliveryMethod },
+		ui: { isPaymentVisible },
+	} = useAppSelector((state) => state);
 
 	const hidePaymentHandler = () => {
 		dispatch(
-			uiActions.changeOrderVisibility({
+			changeOrderVisibility({
 				isCartVisible: true,
 				isPaymentVisible: false,
 			})
 		);
 	};
 
-	const submitFormHandler = (e) => {
+	const submitFormHandler = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		console.log('submited!');
 	};
 
-	const changePaymentMethodHandler = (id) => {};
+	const changePaymentMethodHandler = (id: number) => {};
 
-	const changeDeliveryMethodHandler = (e) => {
+	const changeDeliveryMethodHandler = (e: FormEvent<HTMLButtonElement>) => {
 		dispatch(
 			paymentActions.changeDeliveyMethod({
-				deliveryMethod: e.target.innerText,
+				deliveryMethod: e.currentTarget.innerText as DeliveryMethods,
 			})
 		);
 	};
