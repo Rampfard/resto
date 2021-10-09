@@ -2,10 +2,11 @@ import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import classes from './TotalCard.module.scss';
+import { Card } from '..';
 
 interface TotalCardProps {
 	className: string;
-	value: number;
+	value: string;
 	percent: number;
 	descr: string;
 	icon: ReactNode;
@@ -22,7 +23,7 @@ const TotalCard: FC<TotalCardProps> = ({
 		percent > 0 ? classes['percent-up'] : classes['percent-down'];
 
 	return (
-		<div className={classNames(classes['total-card'], className)}>
+		<Card className={classNames(classes['total-card'], className)}>
 			<div className={classes.status}>
 				<span className={classes.icon}>{icon}</span>
 				<div className={classNames(classes.percent, activeClass)}>
@@ -42,7 +43,7 @@ const TotalCard: FC<TotalCardProps> = ({
 			</div>
 			<p className={classes.value}>{value}</p>
 			<div className={classes.descr}>{descr}</div>
-		</div>
+		</Card>
 	);
 };
 

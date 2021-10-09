@@ -10,7 +10,7 @@ export const getAllProducts = async () => {
 		throw new Error(data.message || 'Could not fetch data.');
 	}
 
-	const transformedItems = [];
+	const transformedItems: IProduct[] = [];
 
 	for (const category in data) {
 		transformedItems.push(...data[category]);
@@ -19,7 +19,7 @@ export const getAllProducts = async () => {
 	return transformedItems;
 };
 
-export const getFilteredProducts = async (filterType) => {
+export const getFilteredProducts = async (filterType: string) => {
 	const response = await fetch(
 		`${FIREBASE_DOMAIN}/products/dishes/${filterType}.json`
 	);

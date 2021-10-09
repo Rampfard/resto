@@ -18,22 +18,6 @@ const CashForm = () => {
 				placeholder="Enter phone number"
 				title="Phone Number"
 			/>
-			<Input
-				className={classNames(classes.input, classes.short)}
-				id="expirationDate"
-				type="number"
-				placeholder="Enter Expiration date"
-				title={'Expiration Date'}
-				short
-			/>
-			<Input
-				className={classNames(classes.input, classes.short)}
-				id="cvv"
-				placeholder="Enter CVV number"
-				type="password"
-				title={'CVV'}
-				short
-			/>
 		</div>
 	);
 };

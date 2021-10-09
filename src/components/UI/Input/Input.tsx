@@ -42,13 +42,6 @@ const Input: FC<InputProps> = (props) => {
 		setValue(e.currentTarget.value);
 	};
 
-	const onBlurHandler = () => {
-		if (type === 'number' && value === '') {
-			console.log('work', value);
-			setValue('1');
-		}
-	};
-
 	return (
 		<div
 			className={classNames(
@@ -66,7 +59,6 @@ const Input: FC<InputProps> = (props) => {
 				type={type ? type : 'text'}
 				value={value}
 				onChange={userInputHandler}
-				onBlur={onBlurHandler}
 				{...attributes}
 			/>
 		</div>

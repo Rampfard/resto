@@ -1,45 +1,44 @@
 .dashboard {
 	display: grid;
-	grid-template-columns: minmax(646px, 70%) minmax(372px, 20%);
-	grid-template-rows: 100px auto;
-	grid-gap: 0 24px;
+	grid-template-columns: [main-start] 3fr [main-end aside-start] 1fr [aside-end];
+	grid-template-rows: [header-start] 7rem [header-end];
+	grid-gap: 0 1.5rem;
 	width: calc(100% - 104px);
-	height: 100vh;
-	padding: 24px;
+	height: 100%;
+	padding: 1.5rem;
 	overflow-y: auto;
 	.header {
-		grid-column: 1 / 2;
+		grid-area: main header;
 		padding-bottom: 24px;
 		margin-bottom: 24px;
 		border-bottom: 1px solid var(--border-color);
 	}
 
 	.title {
-		font-size: 28px;
+		font-size: 1.8rem;
 		line-height: 140%;
 		font-weight: 500;
 	}
 
 	.date {
 		line-height: 140%;
-		font-size: 16px;
+		font-size: 1rem;
 		color: var(--text-form);
 	}
 
-	.container {
-		grid-column: 1 / 2;
-		grid-row: 2 / 3;
-	}
+	// .container {
+	// 	overflow: hidden;
+	// }
 
 	.aside {
-		grid-column: 2 / 3;
-		grid-row: 1 / 3;
+		grid-column: aside;
+		grid-row-start: header-start;
 	}
 
 	.total-cards {
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: 24px;
+		margin-bottom: 1.5rem;
 	}
 
 	.top-list {
@@ -48,7 +47,7 @@
 
 	.top-item {
 		display: flex;
-		margin-bottom: 24px;
+		margin-bottom: 1.5rem;
 		img {
 			border-radius: 50%;
 			width: 55px;
@@ -94,32 +93,21 @@
 	}
 
 	.most-ordered {
-		margin-bottom: 24px;
-	}
-}
-
-@keyframes dashOffset {
-	from {
-		stroke-dashoffset: 550;
-	}
-
-	to {
-		stroke-dashoffset: 200;
+		margin-bottom: 1.5rem;
 	}
 }
 
 @media (max-width: 1200px) {
 	.dashboard {
-		padding: 15px;
-		grid-template-columns: 70% 28%;
+		padding: 1rem;
 		.header {
 			padding-bottom: 10px;
 		}
 
 		.most-ordered {
-			padding: 15px;
+			padding: 1rem;
 			&__header {
-				padding-bottom: 16px;
+				padding-bottom: 1rem;
 			}
 		}
 
@@ -140,18 +128,16 @@
 @media (max-width: 1100px) {
 	.dashboard {
 		width: calc(100% - 70px);
-		grid-template-columns: 100%;
+		grid-template-columns: 1fr;
 		grid-template-rows: auto;
 		.aside {
-			grid-column: unset;
-			grid-row: 3 / 4;
+			grid-area: unset;
 			display: flex;
 			justify-content: space-between;
-			padding-bottom: 24px;
 		}
 
 		.container {
-			grid-row: 2 / 3;
+			grid-area: unset;
 			height: 700px;
 			margin-bottom: 15px;
 		}
@@ -159,7 +145,6 @@
 		.most-ordered {
 			width: 49%;
 			padding: 24px;
-			margin-bottom: 0;
 		}
 
 		.graph {
@@ -187,11 +172,7 @@
 
 		.most-ordered {
 			width: 48%;
-			padding: 14px;
-		}
-
-		.most-ordered-type {
-			max-height: 395px;
+			padding: 0.9rem;
 		}
 	}
 }
@@ -201,28 +182,15 @@
 		.aside {
 			flex-wrap: wrap;
 		}
-
-		.most-ordered {
-			width: 100%;
-		}
-
-		.most-ordered-type {
-			margin-top: 20px;
-		}
 	}
 }
 
 @media (max-width: 640px) {
 	.dashboard {
-		padding-right: 5px;
-		padding-left: 15px;
-		width: 100%;
+		padding-right: 0.6rem;
+		padding-left: 1rem;
 		.container {
-			height: auto;
-		}
-
-		.aside {
-			padding-bottom: 70px;
+			height: max-content;
 		}
 
 		.total {
@@ -240,6 +208,22 @@
 		flex-direction: column;
 		align-items: center;
 		margin-left: 0;
-		margin-bottom: 10px;
+		margin-bottom: 0.6rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.dashboard {
+		width: 100%;
+	}
+}
+
+@keyframes dashOffset {
+	from {
+		stroke-dashoffset: 550;
+	}
+
+	to {
+		stroke-dashoffset: 200;
 	}
 }

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import classNames from 'classnames';
+import { useAppSelector } from '../../hooks/redux-hooks';
 import useOutsideClick from '../../hooks/use-outside-click';
 
 import { ToggleButton } from '../UI';
@@ -17,7 +17,7 @@ import logo from '../../assets/logo.png';
 import classes from './Menu.module.scss';
 
 const Menu = () => {
-	const { isCartVisible } = useSelector((state) => state.ui);
+	const { isCartVisible } = useAppSelector((state) => state.ui);
 	const [isShown, setIsShown] = useState(false);
 
 	const menuRef = useRef(null);
@@ -30,8 +30,6 @@ const Menu = () => {
 
 	useOutsideClick(menuRef, closeMenuHandler);
 
-	let hiddenClass = classes.hidden;
-
 	const toggleMenuHandler = () => {
 		setIsShown(!isShown);
 	};
@@ -39,11 +37,10 @@ const Menu = () => {
 	return (
 		<aside
 			ref={menuRef}
-			className={classNames(
-				classes.menu,
-				isShown && classes.active,
-				isCartVisible && hiddenClass
-			)}
+			className={classNames(classes.menu, {
+				[classes.active]: isShown,
+				[classes.hidden]: isCartVisible,
+			})}
 		>
 			<ToggleButton
 				className={classNames(classes['menu-btn'])}
@@ -58,7 +55,6 @@ const Menu = () => {
 			<nav className={classes.nav}>
 				<ul className={classes['nav-list']}>
 					<li className={classes['nav-item']}>
-						<div className={classes.angle}></div>
 						<NavLink
 							to="/home"
 							className={classes['nav-link']}

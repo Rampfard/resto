@@ -4,7 +4,8 @@
 	border-radius: 0 16px 16px 0;
 	overflow-y: auto;
 	overflow-x: hidden;
-	margin-bottom: 7px;
+	// margin-bottom: 7px;
+	height: 99%;
 	transition: all 0.2s;
 	scrollbar-width: thin;
 	scrollbar-color: var(--moz-scroll-color);
@@ -31,7 +32,7 @@
 	align-items: center;
 	height: 96px;
 	border-radius: 16px;
-	margin-bottom: 10px;
+	margin-bottom: 0.6rem;
 }
 
 .nav {
@@ -40,41 +41,69 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
-		padding-left: 12px;
+		padding-left: 0.8rem;
 	}
 
 	.nav-item {
-		position: relative;
-		margin-bottom: 18px;
+		margin-bottom: 1.1rem;
 	}
 
 	.nav-link {
 		position: relative;
-		display: block;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		width: 92px;
 		height: 80px;
-		padding: 13px 24px 11px 12px;
+		padding: 0.8rem;
+		padding-right: 1rem;
+		&:before,
+		&:after {
+			position: absolute;
+			content: '';
+			width: 20px;
+			background-color: transparent;
+			height: 20px;
+			border-radius: 50%;
+			right: 0;
+		}
+
+		&:before {
+			top: -20px;
+			box-shadow: 20px 20px 0 15px var(--bg-light);
+			display: none;
+		}
+
+		&:after {
+			bottom: -20px;
+			box-shadow: 20px -20px 0 15px var(--bg-light);
+			display: none;
+		}
+
 		&:hover {
 			background-color: var(--bg-light);
 			border-radius: 12px 0px 0px 12px;
+			&:before,
+			&:after {
+				display: block;
+			}
 		}
 	}
 
 	span {
-		display: block;
-		position: absolute;
+		display: flex;
+		position: relative;
+		align-items: center;
+		justify-content: center;
 		width: 56px;
 		height: 56px;
 		text-align: center;
 		border-radius: 8px;
+		z-index: 2;
 	}
 
 	svg {
 		fill: var(--main-color);
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
 	}
 
 	.active {
@@ -88,17 +117,21 @@
 		path {
 			fill: #fff;
 		}
+
+		&:before,
+		&:after {
+			display: block;
+		}
 	}
 
 	.nav-item:last-of-type {
-		margin-top: 1.5rem;
+		margin-top: 2.5rem;
 	}
 }
 
 @media (max-width: 1100px) {
 	.menu {
 		width: 70px;
-		height: 100%;
 		overflow-x: visible;
 		overflow-y: auto;
 	}
@@ -118,15 +151,18 @@
 			position: relative;
 			width: 100%;
 			height: 60px;
-			padding: 0px;
+			padding: 0;
+		}
+
+		.nav-link.active {
+			span {
+				box-shadow: 0px 0px 15px rgba(234, 124, 105, 0.32);
+			}
 		}
 
 		.nav-item:last-of-type {
 			margin-top: auto;
 			margin-bottom: 0;
-			svg {
-				transform: translate(-40%, -50%);
-			}
 		}
 
 		span {
@@ -146,19 +182,29 @@
 		z-index: 100;
 		transition: all 0.3s;
 		overflow: visible;
-		height: 100%;
 		.menu-btn {
 			display: block;
 		}
 	}
 
 	.nav {
-		&-list {
-			padding-right: 4px;
-		}
+		padding: 5px 0;
+		overflow-x: hidden;
 
 		&-item {
 			margin-bottom: 10px;
+		}
+
+		.nav-list {
+			padding: 0 4px;
+		}
+
+		.nav-link.active {
+			border-radius: 12px;
+			&:before,
+			&:after {
+				display: none;
+			}
 		}
 	}
 

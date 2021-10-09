@@ -30,9 +30,11 @@ const Payment: FC = () => {
 	} = useAppSelector((state) => state);
 
 	const hidePaymentHandler = () => {
+		const isTablet = window.matchMedia('(max-width: 968px)').matches;
+
 		dispatch(
 			changeOrderVisibility({
-				isCartVisible: true,
+				isCartVisible: isTablet ? true : false,
 				isPaymentVisible: false,
 			})
 		);
@@ -117,7 +119,7 @@ const Payment: FC = () => {
 						<Dropdown
 							highlighted
 							className={
-								deliveryMethod === 'Dine In' ? classes.dropdown : classes.short
+								deliveryMethod === 'To Go' ? classes.short : classes.dropdown
 							}
 							options={deliveryMethods}
 							onChange={changeDeliveryMethodHandler}
@@ -132,6 +134,15 @@ const Payment: FC = () => {
 							title="Table no."
 							placeholder="Enter Table Number"
 							type="number"
+							short
+						/>
+					)}
+					{deliveryMethod === 'Delivery' && (
+						<Input
+							className={classNames(classes.table)}
+							id="formAddress"
+							title="Address"
+							placeholder="Enter Address"
 							short
 						/>
 					)}

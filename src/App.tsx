@@ -1,11 +1,9 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
-
-import Home from './pages/Home';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Menu from './components/Menu/Menu';
-import Cart from './components/Cart/Cart';
-import Payment from './components/Payment/Payment';
 import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
+import Settings from './pages/Settings';
 
 const App = () => {
 	return (
@@ -20,6 +18,9 @@ const App = () => {
 				</Route>
 				<Route path="/dashboard">
 					<Dashboard />
+				</Route>
+				<Route path="/settings">
+					<Settings />
 				</Route>
 			</Switch>
 		</Layout>

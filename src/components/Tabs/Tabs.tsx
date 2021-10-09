@@ -1,13 +1,13 @@
 import classNames from 'classnames';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import Tab from './Tab';
 import classes from './Tabs.module.scss';
 
 interface TabsProps {
 	className?: string;
 	tabs?: { type: string; name: string }[];
-	onTabChange: (type: string) => void;
 	initialActiveTab?: string;
+	onTabChange: (type: string) => void;
 }
 
 const Tabs: FC<TabsProps> = ({

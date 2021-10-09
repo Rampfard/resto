@@ -18,17 +18,20 @@ const Dashboard = () => {
 
 	const topOrders = [
 		{
-			imgUrl: 'https://firebasestorage.googleapis.com/v0/b/resto-5634a.appspot.com/o/Propducts%2Fcard-1.png?alt=media&token=4f9c78d7-7a27-40f6-9867-bcbffa8e418b',
+			imgUrl:
+				'https://firebasestorage.googleapis.com/v0/b/resto-5634a.appspot.com/o/Propducts%2Fcard-1.png?alt=media&token=4f9c78d7-7a27-40f6-9867-bcbffa8e418b',
 			name: 'Spicy seasoned seafood noodles',
 			quantity: 200,
 		},
 		{
-			imgUrl: 'https://firebasestorage.googleapis.com/v0/b/resto-5634a.appspot.com/o/Propducts%2Fcard-1.png?alt=media&token=4f9c78d7-7a27-40f6-9867-bcbffa8e418b',
+			imgUrl:
+				'https://firebasestorage.googleapis.com/v0/b/resto-5634a.appspot.com/o/Propducts%2Fcard-1.png?alt=media&token=4f9c78d7-7a27-40f6-9867-bcbffa8e418b',
 			name: 'Salted pasta with mushroom sauce',
 			quantity: 150,
 		},
 		{
-			imgUrl: 'https://firebasestorage.googleapis.com/v0/b/resto-5634a.appspot.com/o/Propducts%2Fcard-1.png?alt=media&token=4f9c78d7-7a27-40f6-9867-bcbffa8e418b',
+			imgUrl:
+				'https://firebasestorage.googleapis.com/v0/b/resto-5634a.appspot.com/o/Propducts%2Fcard-1.png?alt=media&token=4f9c78d7-7a27-40f6-9867-bcbffa8e418b',
 			name: 'Beef dumpling in hot and sour soup',
 			quantity: 80,
 		},
@@ -43,9 +46,7 @@ const Dashboard = () => {
 					alt="Dish"
 				/>
 				<div className={classes['top-item__info']}>
-					<div className={classes['top-item__name']}>
-						{order.name}
-					</div>
+					<div className={classes['top-item__name']}>{order.name}</div>
 					<div className={classes['top-item__quantity']}>
 						{order.quantity} dishes ordered
 					</div>
@@ -57,9 +58,7 @@ const Dashboard = () => {
 	return (
 		<section className={classes.dashboard}>
 			<div className={classes.header}>
-				<h2 className={classNames('title', classes.title)}>
-					Dashboard
-				</h2>
+				<h2 className={classNames('title', classes.title)}>Dashboard</h2>
 				<p className={classes.date}>
 					{day}, {date} {month} {year}
 				</p>
@@ -67,20 +66,14 @@ const Dashboard = () => {
 			<div className={classes.container}>
 				<div className={classes['total-cards']}>
 					<TotalCard
-						className={classNames(
-							classes['money-card'],
-							classes['total-card']
-						)}
+						className={classNames(classes['money-card'], classes['total-card'])}
 						percent={32.4}
 						descr={'Total Revenue'}
 						value={'$10,243.00'}
 						icon={<DollarIcon />}
 					/>
 					<TotalCard
-						className={classNames(
-							classes['order-card'],
-							classes['total-card']
-						)}
+						className={classNames(classes['order-card'], classes['total-card'])}
 						percent={-12.4}
 						descr={'Total Dish Ordered'}
 						value={'23,456'}
@@ -97,7 +90,7 @@ const Dashboard = () => {
 						icon={<PeopleIcon />}
 					/>
 				</div>
-				<Table className={classes.table} items={[{ name: 'name' }]} />
+				<Table className={classes.table} />
 			</div>
 			<div className={classes.aside}>
 				<DashboardCard

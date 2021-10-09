@@ -1,5 +1,6 @@
 import { FC, FormEvent, useState } from 'react';
 import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../hooks/redux-hooks';
 
 import { Backdrop } from '../components/UI';
@@ -12,7 +13,6 @@ import Notification from '../components/UI/Notification/Notification';
 import classes from './Home.module.scss';
 import Cart from '../components/Cart/Cart';
 import Payment from '../components/Payment/Payment';
-import { useDispatch } from 'react-redux';
 import { changeOrderVisibility } from '../store/ui-slice';
 import { fetchAllProducts } from '../store/product-actions';
 
@@ -31,6 +31,7 @@ const Home: FC = () => {
 	const { notification, isCartVisible, deliveryMethods } = useAppSelector(
 		(state) => state.ui
 	);
+
 	const [productsType, setProductsType] = useState('hot');
 	const [searchFilter, setSearchFilter] = useState('');
 
@@ -38,7 +39,7 @@ const Home: FC = () => {
 		setProductsType(type);
 	};
 
-	const fetchAndfilterProducts = () => {
+	const fetchAndSetFilterProducts = (delay: number = 400) => {
 		let timer: NodeJS.Timeout;
 
 		return (e: FormEvent<HTMLInputElement>) => {
@@ -48,7 +49,7 @@ const Home: FC = () => {
 			timer = setTimeout(() => {
 				dispatch(fetchAllProducts());
 				setSearchFilter(value);
-			}, 400);
+			}, delay);
 		};
 	};
 
@@ -67,7 +68,7 @@ const Home: FC = () => {
 		<>
 			<section className={classes.home}>
 				<div className={classes.container}>
-					<Header onSearchChange={fetchAndfilterProducts()} />
+					<Header onSearchChange={fetchAndSetFilterProducts()} />
 					<Tabs
 						className={classes['home-tabs']}
 						onTabChange={filterProductsHandler}
@@ -86,9 +87,12 @@ const Home: FC = () => {
 					<Products filterType={productsType} searchFilter={searchFilter} />
 				</div>
 			</section>
+
 			<Cart />
 			<Payment />
+
 			{isCartVisible && <Backdrop onClick={onBackdropClick} />}
+
 			{notification.message && (
 				<Notification type={notification.type}>
 					{notification.message}

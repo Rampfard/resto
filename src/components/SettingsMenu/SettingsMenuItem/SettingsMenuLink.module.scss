@@ -1,0 +1,44 @@
+.menu-item {
+	position: relative;
+	a {
+		display: block;
+		transition: all 0.1s;
+		padding: 1.5rem;
+		&:hover {
+			background: var(--main-color-transparent);
+		}
+	}
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 130%;
+	margin-bottom: 4px;
+	svg {
+		margin-right: 9px;
+		path {
+			fill: var(--text-color);
+		}
+	}
+}
+
+.subtitle {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 140%;
+	color: var(--text-form);
+	margin-left: 25px;
+}
+
+.active {
+	background: var(--main-color-transparent);
+	.title {
+		color: var(--main-color);
+		svg path {
+			fill: var(--main-color);
+		}
+	}
+}

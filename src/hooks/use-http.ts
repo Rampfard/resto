@@ -1,6 +1,20 @@
 import { useReducer, useCallback } from 'react';
 
-function httpReducer(state, action) {
+interface IHTTPState {
+	data: unknown;
+	error: string | null;
+	status: 'pending' | 'completed' | null;
+}
+
+type Action = {
+	type: HTTPReducerActions;
+	responseData?: unknown;
+	errorMessage?: string;
+};
+
+type HTTPReducerActions = 'SUCCESS' | 'ERROR' | 'SEND';
+
+function httpReducer(state: IHTTPState, action: Action): IHTTPState {
 	if (action.type === 'SEND') {
 		return {
 			data: null,
@@ -11,7 +25,7 @@ function httpReducer(state, action) {
 
 	if (action.type === 'SUCCESS') {
 		return {
-			data: action.responseData,
+			data: action.responseData || [],
 			error: null,
 			status: 'completed',
 		};
@@ -20,7 +34,7 @@ function httpReducer(state, action) {
 	if (action.type === 'ERROR') {
 		return {
 			data: null,
-			error: action.errorMessage,
+			error: action.errorMessage ? action.errorMessage : null,
 			status: 'completed',
 		};
 	}
@@ -28,7 +42,10 @@ function httpReducer(state, action) {
 	return state;
 }
 
-const useHttp = (requestFunction, startWithPending = false) => {
+const useHttp = <T>(
+	requestFunction: (requestData?: unknown) => Promise<T>,
+	startWithPending = false
+) => {
 	const [httpState, dispatch] = useReducer(httpReducer, {
 		status: startWithPending ? 'pending' : null,
 		data: null,
@@ -36,16 +53,19 @@ const useHttp = (requestFunction, startWithPending = false) => {
 	});
 
 	const sendRequest = useCallback(
-		async function (requestData) {
+		async function (requestData?: unknown) {
 			dispatch({ type: 'SEND' });
 			try {
 				const responseData = await requestFunction(requestData);
+
 				dispatch({ type: 'SUCCESS', responseData });
 			} catch (error) {
-				dispatch({
-					type: 'ERROR',
-					errorMessage: error.message || 'Something went wrong!',
-				});
+				if (error instanceof Error) {
+					dispatch({
+						type: 'ERROR',
+						errorMessage: error.message || 'Something went wrong!',
+					});
+				}
 			}
 		},
 		[requestFunction]
@@ -54,6 +74,7 @@ const useHttp = (requestFunction, startWithPending = false) => {
 	return {
 		sendRequest,
 		...httpState,
+		data: httpState.data as T | null,
 	};
 };
 

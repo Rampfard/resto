@@ -8,15 +8,14 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	overflow-y: auto;
-	height: 100%;
 	flex: 3;
-	padding: 24px;
+	padding: 1.5rem;
 	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .home-tabs {
-	margin-bottom: 24px;
+	margin-bottom: 1.5rem;
 	border-bottom: 1px solid var(--border-color);
 }
 
@@ -24,23 +23,21 @@
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 20px;
-	.title {
-		padding-top: 8px;
-	}
+	align-items: center;
+	margin-bottom: 1.3rem;
 }
 
 @media (max-width: 969px) {
 	.container {
-		padding: 15px;
-		padding-left: 25px;
+		padding: 1rem;
+		padding-left: 1.5rem;
 	}
 }
 
 @media (max-width: 460px) {
 	.container {
-		padding-right: 15px;
-		padding-left: 15px;
+		padding-right: 1rem;
+		padding-left: 1rem;
 	}
 }
 

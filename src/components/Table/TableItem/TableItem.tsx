@@ -1,8 +1,23 @@
 import classNames from 'classnames';
+import { FC } from 'react';
 
 import classes from './TableItem.module.scss';
 
-const TableItem = ({ avatarUrl, name, menu, totalPayment, status }) => {
+interface TableItemProps {
+	avatarUrl: string;
+	name: string;
+	menu: string;
+	totalPayment: string | number;
+	status: 'pending' | 'preparing' | 'completed';
+}
+
+const TableItem: FC<TableItemProps> = ({
+	avatarUrl,
+	name,
+	menu,
+	totalPayment,
+	status,
+}) => {
 	let activeClass;
 
 	if (status === 'pending') {

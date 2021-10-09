@@ -1,9 +1,6 @@
 .total-card {
-	width: 199px;
-	height: 143px;
-	border-radius: 8px;
-	background-color: var(--bg-dark);
-	padding: 16px;
+	width: 200px;
+	padding: 1rem;
 	&:last-child {
 		margin-right: 0;
 	}
@@ -11,7 +8,7 @@
 	.status {
 		display: flex;
 		align-items: center;
-		margin-bottom: 8px;
+		margin-bottom: 0.5rem;
 	}
 
 	.icon {
@@ -21,7 +18,7 @@
 		height: 38px;
 		border-radius: 8px;
 		background-color: var(--bg-light);
-		margin-right: 12px;
+		margin-right: 0.8rem;
 		svg {
 			position: absolute;
 			top: 50%;
@@ -75,14 +72,14 @@
 
 	.value {
 		font-weight: 600;
-		font-size: 28px;
+		font-size: 1.8rem;
 		line-height: 140%;
-		margin-bottom: 8px;
+		margin-bottom: 0.5rem;
 	}
 
 	.descr {
 		font-weight: 500;
-		font-size: 14px;
+		font-size: 0.9rem;
 		line-height: 130%;
 		color: var(--text-form);
 	}
@@ -90,8 +87,7 @@
 
 @media (max-width: 769px) {
 	.total-card {
-		padding: 10px;
-		height: 120px;
+		padding: 0.6rem;
 		width: 48%;
 		.value {
 			font-size: 20px;
@@ -109,6 +105,18 @@
 		text-align: center;
 		.status {
 			justify-content: center;
+		}
+	}
+}
+
+@media (max-width: 769px) {
+	.dashboard {
+		.aside {
+			flex-wrap: wrap;
+		}
+
+		.most-ordered {
+			width: 100%;
 		}
 	}
 }

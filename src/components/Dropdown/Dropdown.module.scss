@@ -78,11 +78,23 @@
 	.items {
 		transform: translateY(0);
 	}
+
+	.dropdown-btn {
+		svg {
+			transform: rotateX(180deg) translateY(50%);
+		}
+	}
 }
 
 .invert.active {
 	.items {
-		transform: translateY(calc(-120%));
+		transform: translateY(-120%);
+	}
+
+	.dropdown-btn {
+		svg {
+			transform: translateY(-50%);
+		}
 	}
 }
 

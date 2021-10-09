@@ -1,0 +1,26 @@
+.card-empty {
+	border: 1px dashed var(--main-color);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: auto;
+	min-height: 120px;
+	align-items: center;
+	border-radius: 8px;
+	font-weight: 600;
+	color: var(--main-color);
+	transition: all 0.2s;
+	cursor: pointer;
+	svg {
+		stroke: var(--main-color);
+		margin-bottom: 1.5rem;
+		transition: all 0.2s;
+	}
+
+	&:hover {
+		border: 1px solid var(--main-color);
+		svg {
+			transform: scale(1.4);
+		}
+	}
+}
