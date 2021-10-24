@@ -4,5 +4,4 @@ export { default as Card } from './Card/Card';
 export { default as Notification } from './Notification/Notification';
 export { default as ToggleButton } from './ToggleButton/ToggleButton';
 export { default as Backdrop } from './Backdrop/Backdrop';
-export { default as TotalCard } from './TotalCard/TotalCard';
 export { default as Loading } from './Loading/Loading';

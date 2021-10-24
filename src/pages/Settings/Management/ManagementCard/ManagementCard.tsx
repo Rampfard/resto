@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import classes from './ManagementCard.module.scss';
-import Button from '../../UI/Button/Button';
+import { Button } from '@components/UI';
 import { FC } from 'react';
 import { IProduct } from '$types/index';
 

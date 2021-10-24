@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import { Redirect, Route, useRouteMatch } from 'react-router';
-import Appearance from '@components/Appearance/Appearance';
-import Management from '@components/Management/Management';
-import SettingsMenu from '@components/SettingsMenu/SettingsMenu';
+
+import Appearance from './Appearance/Appearance';
+import Management from './Management/Management';
+import SettingsMenu from './SettingsMenu/SettingsMenu';
+
 import classes from './Settings.module.scss';
 
 const Settings: React.FC = () => {

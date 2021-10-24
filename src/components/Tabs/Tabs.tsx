@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC, useState } from 'react';
-import Tab from './Tab';
+import Tab from './Tab/Tab';
 import classes from './Tabs.module.scss';
 
 interface TabsProps {

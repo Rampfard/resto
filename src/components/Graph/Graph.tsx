@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import classes from './Graph.module.scss';
-import Circle from './Circle';
+import Circle from './Circle/Circle';
 import { FC } from 'react';
 
 interface GraphProps {

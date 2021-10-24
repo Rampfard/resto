@@ -1,26 +1,22 @@
 import classNames from 'classnames';
 import { Children, cloneElement, FC, isValidElement, useState } from 'react';
-import Dropdown from '../Dropdown/Dropdown';
-import { Card } from '../UI';
-import classes from './DashboardCard.module.scss';
+import { Dropdown } from '@components/index';
+import { Card } from '@components/UI';
+import classes from './StatisticCard.module.scss';
 
-interface DashboardCardProps {
+interface StatisticCardProps {
   title: string;
   className?: string;
+  dropdownOptions: { name: string }[];
 }
 
-const DashboardCard: FC<DashboardCardProps> = ({
+const StatisticCard: FC<StatisticCardProps> = ({
   title,
   children,
+  dropdownOptions,
   className,
 }) => {
-  const dropdownOptions = [
-    { name: 'Today' },
-    { name: 'Yesterday' },
-    { name: 'Week' },
-  ];
-
-  const [activeTab, setActiveTab] = useState(dropdownOptions[0].name);
+  const [activeTab, setActiveTab] = useState(dropdownOptions[0]?.name);
 
   const dropdownChangeHandler = (tab: string) => {
     setActiveTab(tab);
@@ -47,4 +43,4 @@ const DashboardCard: FC<DashboardCardProps> = ({
   );
 };
 
-export default DashboardCard;
+export default StatisticCard;

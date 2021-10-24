@@ -1,10 +1,7 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Layout from '@components/Layout/Layout';
-import Menu from '@components/Menu/Menu';
-import Dashboard from '@pages/Dashboard/Dashboard';
-import Home from '@pages/Home/Home';
-import Settings from '@pages/Settings/Settings';
-import Authorization from '@pages/Authorization/Authorization';
+import { Layout, Menu } from '@components/index';
+
+import { Home, Dashboard, Settings, Authorization } from '@pages/index';
 
 const App = () => {
   return (

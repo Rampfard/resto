@@ -3,14 +3,12 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '@hooks/redux-hooks';
 
-import { Backdrop } from '@components/UI';
-import Dropdown from '@components/Dropdown/Dropdown';
-import Header from '@components/Header/Header';
-import Products from '@components/Products/Products';
-import Tabs from '@components/Tabs/Tabs';
-import Notification from '@components/UI/Notification/Notification';
-import Cart from '@components/Cart/Cart';
-import Payment from '@components/Payment/Payment';
+import { Backdrop, Notification } from '@components/UI';
+import { Dropdown, Header, Tabs } from '@components/index';
+
+import Products from './Products/Products';
+import Cart from './Cart/Cart';
+import Payment from './Payment/Payment';
 
 import classes from './Home.module.scss';
 import { changeOrderVisibility } from '@store/ui-slice';

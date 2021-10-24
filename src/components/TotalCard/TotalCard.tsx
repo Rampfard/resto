@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import classNames from 'classnames';
 
 import classes from './TotalCard.module.scss';
-import { Card } from '..';
+import { Card } from '@components/UI';
 
 interface TotalCardProps {
   className: string;

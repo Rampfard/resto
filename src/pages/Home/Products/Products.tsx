@@ -2,14 +2,14 @@ import { useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import ProductCard from './Product/ProductCard';
-import { ReactComponent as Loading } from '../../assets/loading.svg';
+import { ReactComponent as Loading } from '@assets/loading.svg';
 
-import { fetchProductsByType } from '../../store/product-actions';
-import { addProduct } from '../../store/cart-slice';
+import { fetchProductsByType } from '@store/product-actions';
+import { addProduct } from '@store/cart-slice';
 
 import classes from './Products.module.scss';
-import { useAppSelector } from '../../hooks/redux-hooks';
-import { showNotification } from '../../utils/showNotification';
+import { useAppSelector } from '@hooks/redux-hooks';
+import { showNotification } from '@utils/showNotification';
 import { IProduct } from '$types/index';
 
 interface ProductsProps {

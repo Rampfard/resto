@@ -1,11 +1,12 @@
 import React, { MouseEvent, useRef, useState } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import { ReactComponent as AboutIcon } from '../../assets/about.svg';
-import { ReactComponent as AppearanceIcon } from '../../assets/appereance.svg';
-import { ReactComponent as ManagementIcon } from '../../assets/managment.svg';
-import { ReactComponent as NotificationIcon } from '../../assets/notification.svg';
-import { ReactComponent as RestarauntIcon } from '../../assets/restaurant.svg';
-import { ReactComponent as SecurityIcon } from '../../assets/security.svg';
+
+import { ReactComponent as AboutIcon } from '@assets/about.svg';
+import { ReactComponent as AppearanceIcon } from '@assets/appereance.svg';
+import { ReactComponent as ManagementIcon } from '@assets/managment.svg';
+import { ReactComponent as NotificationIcon } from '@assets/notification.svg';
+import { ReactComponent as RestarauntIcon } from '@assets/restaurant.svg';
+import { ReactComponent as SecurityIcon } from '@assets/security.svg';
 import classes from './SettingsMenu.module.scss';
 // import SettingsMenuLink from './SettingsMenuItem/SettingsMenuLink';
 

@@ -1,10 +1,8 @@
 import classNames from 'classnames';
 import getCurrentDate from '@utils/getCurrentDate';
 
-import { TotalCard, Button } from '@components/UI';
-import Table from '@components/Table/Table';
-import DashboardCard from '@components/DashboardCard/DashboardCard';
-import Graph from '@components/Graph/Graph';
+import { Button } from '@components/UI';
+import { TotalCard, Table, StatisticCard, Graph } from '@components/index';
 
 import { ReactComponent as DollarIcon } from '@assets/dollar.svg';
 import { ReactComponent as BookmarkIcon } from '@assets/bookmark.svg';
@@ -14,6 +12,12 @@ import classes from './Dashboard.module.scss';
 
 const Dashboard = () => {
   const { date, day, month, year } = getCurrentDate();
+
+  const cardDropdownOptions = [
+    { name: 'Today' },
+    { name: 'Yesterday' },
+    { name: 'Week' },
+  ];
 
   const topOrders = [
     {
@@ -92,24 +96,26 @@ const Dashboard = () => {
         <Table className={classes.table} />
       </div>
       <div className={classes.aside}>
-        <DashboardCard
+        <StatisticCard
           className={classes['most-ordered']}
           title={'Most Ordered'}
+          dropdownOptions={cardDropdownOptions}
         >
           <ul className={classes['top-list']}>{topOrdersItems}</ul>
           <Button wide outline hover>
             View All
           </Button>
-        </DashboardCard>
-        <DashboardCard
+        </StatisticCard>
+        <StatisticCard
           className={classNames(
             classes['most-ordered'],
             classes['most-ordered-type']
           )}
           title={'Most Ordered of Type'}
+          dropdownOptions={cardDropdownOptions}
         >
           <Graph />
-        </DashboardCard>
+        </StatisticCard>
       </div>
     </section>
   );

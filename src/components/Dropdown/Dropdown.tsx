@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, FC } from 'react';
 import classNames from 'classnames';
 
-import { ReactComponent as ArrowIcon } from '../../assets/arrow.svg';
+import { ReactComponent as ArrowIcon } from '@assets/arrow.svg';
 
 import classes from './Dropdown.module.scss';
-import useOutsideClick from '../../hooks/use-outside-click';
+import useOutsideClick from '@hooks/use-outside-click';
 
 interface DropdownProps {
   options: { name: string }[];
