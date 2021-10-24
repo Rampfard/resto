@@ -1,3 +1,4 @@
+import { IProduct } from '$types/index';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface IProductState {
 	products: IProduct[];

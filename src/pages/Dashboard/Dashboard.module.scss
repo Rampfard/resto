@@ -26,9 +26,10 @@
 		color: var(--text-form);
 	}
 
-	// .container {
-	// 	overflow: hidden;
-	// }
+	.container {
+		overflow: hidden;
+		height: 108%;
+	}
 
 	.aside {
 		grid-column: aside;

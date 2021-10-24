@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { Children, cloneElement, FC, isValidElement, useState } from 'react';
 import Dropdown from '../Dropdown/Dropdown';
 import { Card } from '../UI';
 import classes from './DashboardCard.module.scss';
@@ -16,12 +16,14 @@ const DashboardCard: FC<DashboardCardProps> = ({
 }) => {
 	const dropdownOptions = [
 		{ name: 'Today' },
-		{ name: 'Yeaterday' },
+		{ name: 'Yesterday' },
 		{ name: 'Week' },
 	];
 
-	const dropdownChangeHandler = () => {
-		console.log('dsdsadsa');
+	const [activeTab, setActiveTab] = useState(dropdownOptions[0].name);
+
+	const dropdownChangeHandler = (tab: string) => {
+		setActiveTab(tab);
 	};
 
 	return (
@@ -34,7 +36,13 @@ const DashboardCard: FC<DashboardCardProps> = ({
 					onChange={dropdownChangeHandler}
 				/>
 			</div>
-			<div className={classes.content}>{children}</div>
+			<div className={classes.content}>
+				{Children.map(children, (child) => {
+					if (!isValidElement(child)) return child;
+
+					return cloneElement(child, { tab: activeTab });
+				})}
+			</div>
 		</Card>
 	);
 };

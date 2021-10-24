@@ -1,3 +1,8 @@
+import {
+	DeliveryMethods,
+	NotificationType,
+	RequestStatusType,
+} from '$types/index';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type StatusType = string | null;

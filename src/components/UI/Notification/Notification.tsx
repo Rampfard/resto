@@ -1,3 +1,4 @@
+import { NotificationType } from '$types/index';
 import classNames from 'classnames';
 import { FC } from 'react';
 import { createPortal } from 'react-dom';

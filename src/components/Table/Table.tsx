@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import useHttp from '../../hooks/use-http';
 import { getAllOrders } from '../../api/api';
@@ -9,6 +9,7 @@ import { Loading, Card } from '../UI';
 import { ReactComponent as FilterIcon } from '../../assets/filter-settings.svg';
 
 import classes from './Table.module.scss';
+import { IOrder } from '$types/index';
 
 interface TableProps {
 	className: string;
@@ -71,8 +72,8 @@ const Table: FC<TableProps> = ({ className }) => {
 		}
 	}
 
-	const filterOrdersHandler = (e: FormEvent<HTMLButtonElement>) => {
-		setFilterType(e.currentTarget.textContent!);
+	const filterOrdersHandler = (tab: string) => {
+		setFilterType(tab);
 	};
 
 	return (

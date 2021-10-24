@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import classes from './ProductCard.module.scss';
 import Button from '../../UI/Button/Button';
 import { FC } from 'react';
+import { IProduct } from '$types/index';
 
 type AddFn = (
 	item: Omit<IProduct, 'maxQuantity' | 'totalPrice' | 'art'>

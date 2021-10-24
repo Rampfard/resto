@@ -1,3 +1,4 @@
+import { NotificationType } from '$types/index';
 import { Dispatch } from 'redux';
 import { removeNotification, setNotification } from '../store/ui-slice';
 

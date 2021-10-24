@@ -10,6 +10,7 @@ import { changeDeliveyMethod } from '../../store/payment-slice';
 import classes from './Cart.module.scss';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { FormEvent } from 'react';
+import { DeliveryMethods } from '$types/index';
 
 const Cart = () => {
 	const dispatch = useDispatch();

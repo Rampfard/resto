@@ -1,3 +1,4 @@
+import { DeliveryMethods, PaymentMethod } from '$types/index';
 import { createSlice } from '@reduxjs/toolkit';
 
 interface IPaymentState {

@@ -10,6 +10,7 @@ import { addProduct } from '../../store/cart-slice';
 import classes from './Products.module.scss';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { showNotification } from '../../utils/showNotification';
+import { IProduct } from '$types/index';
 
 interface ProductsProps {
 	filterType: string;
@@ -77,7 +78,7 @@ const Products: FC<ProductsProps> = ({ filterType, searchFilter }) => {
 
 	let content = products;
 
-	if (searchFilter.trim().length > 0) {
+	if (searchFilter.trim().length > 2) {
 		content = content.filter(
 			(product) =>
 				product.name.includes(searchFilter) ||
@@ -85,7 +86,7 @@ const Products: FC<ProductsProps> = ({ filterType, searchFilter }) => {
 		);
 	}
 
-	if (searchFilter.trim().length < 1) {
+	if (searchFilter.trim().length < 3) {
 		content = content.filter((product) => product.type.includes(filterType));
 	}
 

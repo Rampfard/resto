@@ -1,0 +1,101 @@
+.authorization {
+	padding: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: calc(100% - 104px);
+	&__title {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+}
+
+.title {
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+.container {
+	padding: 1.5rem 2.5rem;
+}
+
+.text {
+	margin-top: 30px;
+	a {
+		margin-left: 5px;
+		text-decoration: none;
+		color: var(--main-color);
+	}
+}
+
+.btn {
+	width: 100%;
+}
+
+.control {
+	position: relative;
+	margin: 20px 0 40px;
+	width: 300px;
+}
+
+.control input {
+	background-color: transparent;
+	border: 0;
+	border-bottom: 2px var(--text-color) solid;
+	display: block;
+	width: 100%;
+	padding: 1rem 0;
+	font-size: 1.1rem;
+	color: var(--text-color);
+}
+
+.control input:focus,
+.control input:valid {
+	outline: 0;
+	border-bottom-color: var(--main-color);
+}
+
+.control label {
+	position: absolute;
+	top: 15px;
+	left: 0;
+}
+
+.control label span {
+	display: inline-block;
+	font-size: 18px;
+	min-width: 5px;
+	transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.control input:focus,
+.control input:valid {
+	z-index: 1;
+}
+.control input:focus + label span,
+.control input:valid + label span {
+	color: var(--main-color);
+	transform: translateY(-30px);
+}
+
+@media (max-width: 1100px) {
+	.authorization {
+		width: calc(100% - 70px);
+	}
+}
+
+@media (max-width: 640px) {
+	.container {
+		padding: 1rem 1.5rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.authorization {
+		width: 100%;
+	}
+
+	.control {
+		width: 200px;
+	}
+}

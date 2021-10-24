@@ -1,17 +1,16 @@
 import classNames from 'classnames';
-import React from 'react';
-import getCurrentDate from '../utils/getCurrentDate';
+import getCurrentDate from '@utils/getCurrentDate';
 
-import { TotalCard, Button } from '../components/UI';
-import Table from '../components/Table/Table';
+import { TotalCard, Button } from '@components/UI';
+import Table from '@components/Table/Table';
+import DashboardCard from '@components/DashboardCard/DashboardCard';
+import Graph from '@components/Graph/Graph';
 
-import { ReactComponent as DollarIcon } from '../assets/dollar.svg';
-import { ReactComponent as BookmarkIcon } from '../assets/bookmark.svg';
-import { ReactComponent as PeopleIcon } from '../assets/people.svg';
+import { ReactComponent as DollarIcon } from '@assets/dollar.svg';
+import { ReactComponent as BookmarkIcon } from '@assets/bookmark.svg';
+import { ReactComponent as PeopleIcon } from '@assets/people.svg';
 
 import classes from './Dashboard.module.scss';
-import DashboardCard from '../components/DashboardCard/DashboardCard';
-import Graph from '../components/Graph/Graph';
 
 const Dashboard = () => {
 	const { date, day, month, year } = getCurrentDate();
@@ -37,9 +36,9 @@ const Dashboard = () => {
 		},
 	];
 
-	const topOrdersItems = topOrders.map((order) => {
+	const topOrdersItems = topOrders.map((order, i) => {
 		return (
-			<li key={Math.random().toString()} className={classes['top-item']}>
+			<li key={i} className={classes['top-item']}>
 				<img
 					className={classes['top-item__img']}
 					src={order.imgUrl}

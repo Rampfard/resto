@@ -1,15 +1,15 @@
-type DeliveryMethods = 'Dine In' | 'Delivery' | 'To Go';
-type RequestStatusType = 'completed' | 'pending' | 'error' | null;
-type NotificationType = 'success' | 'error' | 'warn' | null;
-type PaymentMethod = 'card' | 'cash' | 'paypal';
-type ProductRequest =
+export type DeliveryMethods = 'Dine In' | 'Delivery' | 'To Go';
+export type RequestStatusType = 'completed' | 'pending' | 'error' | null;
+export type NotificationType = 'success' | 'error' | 'warn' | null;
+export type PaymentMethod = 'card' | 'cash' | 'paypal';
+export type ProductRequest =
 	| 'hot'
 	| 'cold'
 	| 'soup'
 	| 'dessert'
 	| 'grill'
 	| 'appetizer';
-interface ICartProduct {
+export interface ICartProduct {
 	id: string;
 	type: string;
 	name: string;
@@ -19,7 +19,7 @@ interface ICartProduct {
 	totalPrice: number;
 	maxQuantity: number;
 }
-interface IProduct {
+export interface IProduct {
 	id: string;
 	type: string;
 	name: string;
@@ -29,7 +29,7 @@ interface IProduct {
 	img_src: string;
 }
 
-interface IOrder {
+export interface IOrder {
 	avatar_url: string;
 	id: string;
 	menu: string;

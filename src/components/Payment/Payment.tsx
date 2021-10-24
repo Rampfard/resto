@@ -17,6 +17,7 @@ import classes from './Payment.module.scss';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { FC, FormEvent, useState } from 'react';
 import CashForm from './CashForm/CashForm';
+import { DeliveryMethods, PaymentMethod } from '$types/index';
 
 const Payment: FC = () => {
 	const dispatch = useDispatch();
@@ -61,10 +62,10 @@ const Payment: FC = () => {
 		setPaymentMethod(id);
 	};
 
-	const changeDeliveryMethodHandler = (e: FormEvent<HTMLButtonElement>) => {
+	const changeDeliveryMethodHandler = (tab: string) => {
 		dispatch(
 			changeDeliveyMethod({
-				deliveryMethod: e.currentTarget.innerText as DeliveryMethods,
+				deliveryMethod: tab as DeliveryMethods,
 			})
 		);
 	};

@@ -122,7 +122,7 @@ const Menu = () => {
 					</li>
 					<li className={classes['nav-item']}>
 						<NavLink
-							to="/auth"
+							to="/authorization"
 							className={classes['nav-link']}
 							activeClassName={classes.active}
 						>

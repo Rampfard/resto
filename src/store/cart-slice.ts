@@ -1,3 +1,4 @@
+import { ICartProduct, IProduct } from '$types/index';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IProductsState {

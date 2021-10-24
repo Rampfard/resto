@@ -1,3 +1,4 @@
+import { PaymentMethod } from '$types/index';
 import classNames from 'classnames';
 import { FC } from 'react';
 import classes from './PaymentCard.module.scss';

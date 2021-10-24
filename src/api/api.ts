@@ -1,3 +1,5 @@
+import { IProduct } from '$types/index';
+
 const FIREBASE_DOMAIN =
 	'https://resto-5634a-default-rtdb.europe-west1.firebasedatabase.app';
 
